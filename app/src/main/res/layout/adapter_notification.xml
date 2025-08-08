@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    app:cardBackgroundColor="@color/white"
+    android:id="@+id/cardMain"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:paddingRight="2dp"
+            android:maxLines="1"
+            android:text="skjdf"
+            android:layout_toLeftOf="@+id/tvEmail"
+            android:textColor="#373435"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_medium"
+            />
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:paddingRight="2dp"
+            android:maxLines="1"
+            android:text="sldkf"
+            android:layout_toLeftOf="@+id/tvEmail"
+            android:textColor="#373435"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_regular"
+            />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

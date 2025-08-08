@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_colour_two">
+
+    <FrameLayout
+        android:id="@+id/fragment_container_msp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/linearTop_msp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBack_msp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_back" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvTitle_dealer_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/cardBack_msp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Marketing Activity"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rel_main_msp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:layout_below="@+id/linearTop_msp">
+
+
+        <RelativeLayout
+            android:id="@+id/rel_date_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:paddingLeft="5dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Activity Date"
+                        android:textColor="#383838"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:id="@+id/carddate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:layout_gravity="start"
+                        android:background="@drawable/edittext_shape_new"
+                        android:gravity="start">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/ic_calendar_new" />
+
+
+                        <TextView
+                            android:id="@+id/tvactivitydate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:hint="DD-MM-YYYY"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:layout_below="@+id/rel_date_filter"
+            android:text="MSP Activity Type"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtselectmsptype"
+            android:layout_below="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select MSP Type"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <TextView
+            android:id="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtselectmsptype"
+            android:fontFamily="@font/inter_regular"
+            android:text="No. of Participants"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <EditText
+            android:id="@+id/edtSearchbranch"
+            android:layout_below="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:inputType="number"
+            android:hint="Enter no. of participant"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_below="@+id/edtSearchbranch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Activity Location (City)"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtcityyy"
+            android:layout_below="@+id/textview1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select City"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_below="@+id/edtcityyy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Activity Event Under"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtSearchyear"
+            android:layout_below="@+id/textview3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select customer"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <LinearLayout
+            android:id="@+id/linearButton"
+            android:layout_below="@+id/edtSearchyear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSubmit"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/colur_dark_blue"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_colour_two">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp">
+
+            <EditText
+                android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_shape_new"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Search Customer"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textColorHint="@color/hintColor"
+                android:textSize="14sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnercustomertype"
+                android:layout_below="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_shape_new"
+                android:focusable="false"
+                android:layout_marginTop="10dp"
+                android:hint="Search Customer Type"
+                android:fontFamily="@font/inter_regular"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textColorHint="@color/hintColor"
+                android:textSize="14sp"
+                android:theme="@style/MyEditTextThemeColor" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnercustomertype"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerfilterCity"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_shape_new"
+                android:focusable="false"
+                android:layout_marginRight="5dp"
+                android:hint="Search City"
+                android:fontFamily="@font/inter_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textColorHint="@color/hintColor"
+                android:textSize="14sp"
+                android:theme="@style/MyEditTextThemeColor" />
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerfilterbranch"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_shape_new"
+                android:focusable="false"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:hint="Search Branch"
+                android:fontFamily="@font/inter_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textColorHint="@color/hintColor"
+                android:textSize="14sp"
+                android:theme="@style/MyEditTextThemeColor" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:paddingBottom="8dp" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

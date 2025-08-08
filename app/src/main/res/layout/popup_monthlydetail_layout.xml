@@ -1,0 +1,726 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colur_dark_blue"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+
+        <TextView
+            android:id="@+id/textview_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/img_close"
+            android:text="Monthly Detail"
+            android:textAlignment="center"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_cross_blue" />
+
+        <View
+            android:layout_below="@+id/textview_head"
+            android:id="@+id/vline1"
+            android:background="#EBEBEB"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rel_dealer_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@id/vline1"
+            android:visibility="visible">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_name"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:gravity="center"
+                            android:text="Month"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/title_cytm"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:text="Target (Lac)"
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_lytm"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:text="Achievement (Lac)"
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/title_growth"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="achievement %"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#BDBDBD"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_april"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="April"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_apr_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_apr_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_apr_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_may"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="May"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_may_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_may_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_may_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_june"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="June"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_jun_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_jun_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_jun_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_july"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="July"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_jul_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_jul_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_jul_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_aug"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Augest"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_aug_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_aug_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_aug_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_sep"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="September"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_sep_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_sep_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_sep_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_oct"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="October"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_oct_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_oct_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_oct_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_nov"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="November"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_nov_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/tv_nov_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_nov_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_dec"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="December"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_dev_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_dec_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_dev_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_jan"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:gravity="center"
+                            android:text="January"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/tv_jan_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_jan_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_jan_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_feb"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="February"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_feb_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_feb_value"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_feb_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_month_march"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="March"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_mar_tar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_mar_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_mar_per_val"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

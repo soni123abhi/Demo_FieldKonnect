@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:id="@+id/rel_main"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/dealer_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <HorizontalScrollView
+            android:id="@+id/hori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/vieww31"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+                    <TextView
+                        android:id="@+id/title_name_value"
+                        android:layout_width="168dp"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:maxLines="2"
+                        android:background="#ACE0F4"
+                        android:textColor="#383838"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/vieww2"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+
+                    <TextView
+                        android:id="@+id/title_ly_value"
+                        android:layout_width="149dp"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:background="#D1ECCB"
+                        android:textSize="12sp"
+                        android:maxLines="2"
+                        android:textColor="#000"
+                        android:textStyle="normal"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/vieww3"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+                    <TextView
+                        android:id="@+id/title_lmtd_value"
+                        android:layout_width="119dp"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:background="#D1ECCB"
+                        android:maxLines="2"
+                        android:textSize="12sp"
+                        android:textColor="#000"
+                        android:textStyle="normal"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/vieww4"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+
+                    <TextView
+                        android:id="@+id/title_cy_value"
+                        android:layout_width="119dp"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:maxLines="2"
+                        android:textSize="12sp"
+                        android:background="#D1ECCB"
+                        android:textColor="#000"
+                        android:textStyle="normal"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/vieww5"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+
+
+                    <TextView
+                        android:id="@+id/title_cmtd_value"
+                        android:layout_width="119dp"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:maxLines="2"
+                        android:background="#D1ECCB"
+                        android:textSize="12sp"
+                        android:textColor="#000"
+                        android:textStyle="normal"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/vieww6"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#BDBDBD"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/vieeew22"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/hori"
+            android:layout_height="1dp"
+            android:background="#BDBDBD"/>
+    </RelativeLayout>
+</RelativeLayout>

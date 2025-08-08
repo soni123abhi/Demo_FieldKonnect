@@ -1,0 +1,5 @@
+rootProject.name='Gajra'
+include ':app'
+include ':gaugelibrary'
+rootProject.name = "Gajra New Design"
+include ':multiselectspinnerlibrary'

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colur_dark_blue"
+        android:background="@drawable/edittext_shape"
+        android:hint="Enter value" />
+
+    <EditText
+        android:id="@+id/edtt_remark"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/edittext_shape"
+        android:fontFamily="@font/inter_regular"
+        android:maxLines="2"
+        android:hint="Enter Remark here"
+        android:textStyle="normal"
+        android:textColor="#383838"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_below="@+id/edtt_remark"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="Submit" />
+</RelativeLayout>

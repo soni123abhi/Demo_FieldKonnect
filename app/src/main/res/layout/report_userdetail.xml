@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="172dp"
+    android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_tracking_circle"/>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="-3dp"
+            android:layout_below="@+id/img1"
+            android:background="#00ACD8" />
+
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_time_icon"
+            android:layout_toRightOf="@+id/img1"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_toRightOf="@+id/img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="06:43 am"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:singleLine="true"
+            android:textColor="#00ACD8"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/time"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
+                    android:maxLines="2"
+                    android:text="Punch in"
+                    android:textColor="#383838"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_below="@+id/tv_tittle"
+            android:layout_toRightOf="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="4"
+            android:text="City Indore ,Today Visit Local Market"
+            android:textColor="#8A8A8A"
+            android:textSize="14dp"
+            android:textStyle="normal" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_loc"
+            android:layout_below="@+id/tv_msg"
+            android:layout_toRightOf="@+id/time"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/colur_dark_blue"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/tvsubmitt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_semibold"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Location"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+        </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

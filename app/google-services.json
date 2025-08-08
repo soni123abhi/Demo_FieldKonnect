@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "364772273793",
+    "project_id": "fieldkonnectsilver",
+    "storage_bucket": "fieldkonnectsilver.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364772273793:android:87c0aaa2d6d74c429f6780",
+        "android_client_info": {
+          "package_name": "com.exp.clonefieldkonnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfmkj24w1mnHknN-2eKuwkHmsWAtD_5Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364772273793:android:91ee93aaaa82d5d59f6780",
+        "android_client_info": {
+          "package_name": "com.exp.fieldkonnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfmkj24w1mnHknN-2eKuwkHmsWAtD_5Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

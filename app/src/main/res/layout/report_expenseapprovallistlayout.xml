@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content"
+    android:weightSum="3"
+    android:id="@+id/rel_main"
+    app:cardCornerRadius="5dp"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="Name"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:text=""
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="#000"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:layout_below="@+id/tv_name"
+            android:layout_toRightOf="@+id/tv_expense_num"
+            android:layout_toLeftOf="@+id/tv_expense_date"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="#FFC700"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@+id/tv_name"
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#837C7C"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_type"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@+id/tv_expense_num"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colur_light_blue"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/viewwwww"
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:layout_marginLeft="-2dp"
+            android:background="@color/hintColor"
+            android:layout_below="@+id/tv_expense_num"
+            android:layout_toRightOf="@+id/tv_expense_type" />
+
+        <TextView
+            android:id="@+id/tv_expense_attachment"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="No Att."
+            android:layout_below="@+id/tv_expense_num"
+            android:layout_toRightOf="@+id/viewwwww"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#837C7C"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone"
+            android:layout_below="@+id/tv_expense_num"
+            android:layout_toRightOf="@+id/tv_expense_attachment"
+            android:layout_toLeftOf="@+id/tv_expense_amount"
+            android:textAlignment="textEnd"
+            android:singleLine="true"
+            android:padding="2dp"
+            android:layout_marginRight="0dp"
+            android:textColor="#837C7C"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_expense_date"
+            android:text=""
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/ic_rupees"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colur_light_blue"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone"
+            android:layout_below="@+id/tv_expense_amount"
+            android:layout_toLeftOf="@+id/tv_expense_claim_amt"
+            android:textAlignment="textEnd"
+            android:singleLine="true"
+            android:layout_marginTop="2dp"
+            android:padding="2dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="0dp"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_expense_claim_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_expense_amount"
+            android:text=""
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/ic_rupees"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colur_light_blue"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

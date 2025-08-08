@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:id="@+id/relativeMain"
+    android:minHeight="90dp"
+    android:background="@color/bg_colour_two"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="1dp"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/demo"
+                    android:scaleType="centerCrop"
+                    />
+                <LinearLayout
+                    android:id="@+id/linearvisit"
+                    android:layout_below="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardvisit"
+                        android:layout_width="wrap_content"
+                        app:cardBackgroundColor="#FFF2F2"
+                        app:cardCornerRadius="18dp"
+                        android:layout_marginRight="0dp"
+                        app:cardElevation="0dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvvisit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Click For Visit Customer"
+                            android:textSize="10sp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:paddingRight="10dp"
+                            android:textColor="#FF0000"
+                            android:fontFamily="@font/inter_medium"
+                            />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_toLeftOf="@+id/linearStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_medium"
+                            />
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#21, Villya hena nagar, 324091"
+                            android:textSize="10sp"
+                            android:minLines="1"
+                            android:maxLines="3"
+                            android:paddingBottom="10dp"
+                            android:textColor="#9F9E9E"
+                            android:fontFamily="@font/inter_medium"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardGrade"
+                            android:layout_width="wrap_content"
+                            app:cardBackgroundColor="#FFF4B9"
+                            app:cardCornerRadius="18dp"
+                            android:layout_marginRight="8dp"
+                            app:cardElevation="0dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvGrade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Grade A"
+                                android:textSize="10sp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:paddingRight="10dp"
+                                android:textColor="#CFA200"
+                                android:fontFamily="@font/inter_medium"
+                                />
+
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardStatus"
+                            android:layout_width="wrap_content"
+                            app:cardBackgroundColor="#FFF2F2"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hot"
+                                android:textSize="10sp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:paddingRight="10dp"
+                                android:textColor="#FF0000"
+                                android:fontFamily="@font/inter_medium" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#9F9E9E"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/linearLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardloc"
+                            android:layout_width="wrap_content"
+                            app:cardBackgroundColor="#25B700"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txt_loc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_location_customer"
+                                android:text=" Location"
+                                android:textSize="12sp"
+                                android:paddingLeft="5dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:paddingRight="10dp"
+                                android:textColor="#FFF"
+                                android:fontFamily="@font/inter_medium"
+                                />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:layout_toLeftOf="@+id/linearMail"
+
+                        android:layout_toRightOf="@+id/linearLocation"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/linearCall"
+                            android:layout_weight=".8"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_call_customer"
+                                android:drawablePadding="4dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="Call"
+                                android:textColor="#373435"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.2"
+                            android:id="@+id/linearWhatsApp"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_mail_customer"
+                                android:drawablePadding="4dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="Whatsapp"
+                                android:textColor="#373435"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearMail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_mail_customer"
+                            android:drawablePadding="4dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="Mail"
+                            android:textColor="#373435"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+</RelativeLayout>

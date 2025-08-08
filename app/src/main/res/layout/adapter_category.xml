@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="85dp"
+    android:layout_height="100dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="#F7F7F9"
+    android:minWidth="80dp"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/cardMain"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="56dp"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="56dp">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center" />
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:maxLines="2"
+                android:minWidth="60dp"
+                android:minLines="2"
+                android:text="Category"
+                android:textColor="#373435"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

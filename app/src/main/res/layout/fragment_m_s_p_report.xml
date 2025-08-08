@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_colour_two">
+
+    <FrameLayout
+        android:id="@+id/fragment_container_msp_report"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/linearTop_msp_report"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBack_msp_report"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_back" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvTitle_msp_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/cardBack_msp_report"
+                android:fontFamily="@font/inter_semibold"
+                android:text="MSP Report"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rel_main_msp_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:layout_below="@+id/linearTop_msp_report">
+
+        <TextView
+            android:id="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select User"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtuser"
+            android:layout_below="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:clickable="false"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select User"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <TextView
+            android:id="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtuser"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Branch Name"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtSearchbranch"
+            android:layout_below="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Branch"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_below="@+id/edtSearchbranch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Select Financial Year"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtyear"
+            android:layout_below="@+id/textview1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select year"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+
+        <TextView
+            android:id="@+id/textview45"
+            android:layout_below="@+id/edtyear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Primary Scheme"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtScheme"
+            android:layout_below="@+id/textview45"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Scheme"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <RelativeLayout
+            android:id="@+id/rel_msp_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@id/edtScheme"
+            android:visibility="visible">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_name"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Activity Type"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_april"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="April"
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_may"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="May"
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_june"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="June"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_july"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="July"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_aug"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Augest"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_sep"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="September"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_oct"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="October"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_nov"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="November"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_dec"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="December"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_jan"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="January"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_feb"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Febuary"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/title_mar"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="March"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/vieww31"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_type"
+                            android:layout_width="148dp"
+                            android:layout_height="match_parent"
+                            android:text="Type"
+                            android:maxLines="2"
+                            android:background="#FFF"
+                            android:textColor="#383838"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:id="@+id/vieww2"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_april_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:id="@+id/vieww_appp"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_april_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:id="@+id/vieww3"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_may_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:id="@+id/vieww_may"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_may_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_june_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_june_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_july_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_july_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_aug_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_aug_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_sep_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_sep_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_oct_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_oct_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_nov_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_nov_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_dec_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_dec_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_jan_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_jan_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_feb_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_feb_activity_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#D1ECCB"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+                        <TextView
+                            android:id="@+id/title_march_participant_value"
+                            android:layout_width="73dp"
+                            android:layout_height="match_parent"
+                            android:text="Participants"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+                        <TextView
+                            android:id="@+id/title_march_activity_value"
+                            android:layout_width="72dp"
+                            android:layout_height="match_parent"
+                            android:text="Activity"
+                            android:background="#FFF"
+                            android:textSize="12sp"
+                            android:maxLines="2"
+                            android:textColor="#000"
+                            android:textStyle="normal"
+                            android:gravity="center"/>
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="#BDBDBD"/>
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="#BDBDBD"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_msp_scheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/report_msp_report_layout"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+        </RelativeLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardshowww"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rel_msp_table"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:layout_marginLeft="46dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="46dp"
+            android:layout_marginBottom="5dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/colur_dark_blue"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:text="Download MSP Report"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

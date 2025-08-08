@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Clone Field Konnect</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="poor_connection">Poor connection</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="please_select_image">Please select image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fan_app"><![CDATA[FAN & APP]]></string>
+    <string name="total_order_value_n_current_month">Total Order Value\n(Current Month)</string>
+    <string name="total_order_quantity_n_current_month">Total Order Quantity\n(Current Month)</string>
+    <string name="ly_n_lac">LY\n(Lac)</string>
+    <string name="lymtd_n_lac">LYMTD\n(Lac)</string>
+    <string name="cy_n_lac">CY\n(Lac)</string>
+    <string name="cymtd_n_lac">CYMTD\n(Lac)</string>
+    <string name="lytm">LYTM\n(Lac)</string>
+    <string name="cytm">CYTM\n(Lac)</string>
+    <string name="growth">Goly %</string>
+    <string name="group_name">Group Name</string>
+    <string name="market_intelligence">Market\nIntelligence</string>
+</resources>

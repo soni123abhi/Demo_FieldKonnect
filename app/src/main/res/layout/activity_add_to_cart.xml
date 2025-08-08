@@ -1,0 +1,1569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/linearTop"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            app:cardBackgroundColor="#ffffff"
+            app:cardCornerRadius="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    app:cardBackgroundColor="#00000000"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_back" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/cardBack"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Submit Order"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearTop">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:background="@color/bg_colour_two"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/edtRetailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_shape_new"
+                    android:drawableRight="@drawable/ic_arrow_spinner"
+                    android:hint="Select Customer"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:theme="@style/MyEditTextThemeColor"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/edtDistributor"
+                    android:layout_below="@+id/edtRetailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_shape_new"
+                    android:drawableRight="@drawable/ic_arrow_spinner"
+                    android:hint="Select Distributor"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:theme="@style/MyEditTextThemeColor" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/edtDistributor">
+
+                    <LinearLayout
+                        android:id="@+id/linear_table"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/edittext_shape_new"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="2.5"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:paddingLeft="25dp"
+                                    android:text="Product"
+                                    android:textColor="#373435"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".6"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:gravity="center_horizontal"
+                                    android:text="Qty"
+                                    android:textColor="#373435"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1.4"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:gravity="center_horizontal"
+                                    android:text="Rate"
+                                    android:textColor="#373435"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:gravity="center_horizontal"
+                                    android:text="Tax"
+                                    android:textColor="#373435"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1.5"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:gravity="center_horizontal"
+                                    android:singleLine="true"
+                                    android:text="Amount"
+                                    android:textColor="#373435"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9F9E9E" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/titleTotal"
+                        android:layout_below="@+id/linear_table"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/edittext_shape_new"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_ebd"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="STD Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_stdfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_ebd_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_ebd_dis"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="EBD Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_ebdfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_ebd_dis_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_distributor"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="MOU Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_distributorfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_distributor_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_special"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Special Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_Specialfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+
+                            <TextView
+                                android:id="@+id/tv_Special_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_cluster"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Cluster Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_clusterfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_cluster_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_Frieght"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Frieght Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_Frieghtfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+
+
+                            <TextView
+                                android:id="@+id/tv_Frieght_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_cashdiscount_pump"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Cash Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_cashvalue_pump"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_cash_amt_pump"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_dealer"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Deal Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_dealerfilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Select"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+
+                            <TextView
+                                android:id="@+id/tv_dealer_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_total_dis_pump"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Total Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_disvalue_pump"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_dis_amt_pump"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_Doddiscount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="DOD Discount %"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_dodvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_dod_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_Specialdiscount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Special Distribution Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_specialvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_special_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_distributionmargindiscount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Distribution Margin Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_marginvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_margin_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_extradiscount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Extra Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_extravalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                 android:id="@+id/tv_extra_amt"
+                                 android:layout_width="0dp"
+                                 android:layout_height="wrap_content"
+                                 android:layout_gravity="center_vertical"
+                                 android:layout_weight="1.3"
+                                 android:gravity="end"
+                                 android:text=""
+                                 android:layout_marginRight="20dp"
+                                 android:paddingRight="15dp"
+                                 android:fontFamily="@font/inter_medium"
+                                 android:textColor="#373435"
+                                 android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_cashdiscount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Cash Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_cashvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_cash_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_total_dis"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Total Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_disvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_dis_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_agri_std_discount"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="STD Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_std_agrivalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_agri_dis_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_agri_total_dis"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Total Discount%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_agri_totalvalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape"
+                                android:hint="Enter"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_agri_total_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.3"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#9F9E9E" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_5gst"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="GSt 5%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_5gstamt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linear_12gst"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="GSt 12%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_12gstamt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text=""
+                                android:paddingRight="15dp"
+                                android:layout_marginRight="20dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linear_18gst"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="GSt 18%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_18gstamt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_28gst"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="GSt 28%"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_28gstamt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#9F9E9E"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1"
+                                android:text="Sub Total"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="12sp" />
+
+
+                            <TextView
+                                android:id="@+id/tvAmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:layout_marginRight="20dp"
+                                android:text=""
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#9F9E9E"
+                            />
+
+
+                        <LinearLayout
+                            android:id="@+id/linearTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginLeft="18dp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="GST Total"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:textColor="#000"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Total Order Value"
+                                        android:textColor="#000"
+                                        android:layout_marginTop="8dp"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="15dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvGSTTotal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:gravity="end"
+                                        android:text=""
+                                        android:layout_marginRight="20dp"
+                                        android:layout_gravity="end"
+                                        android:textColor="#000"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvTotal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:text=""
+                                        android:layout_marginRight="20dp"
+                                        android:textColor="#000"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/titlepayment"
+                        android:layout_below="@+id/titleTotal"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/edittext_shape_new"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_advance"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1.2"
+                                android:text="Advance Payment"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="12sp" />
+
+
+                            <EditText
+                                android:id="@+id/edt_advance_pay"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:padding="5dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center"
+                                android:background="@drawable/edittext_shape_new"
+                                android:hint="Enter advance payment"
+                                android:inputType="numberDecimal"
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#9F9E9E" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_remaining_paymnet"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="18dp"
+                                android:layout_weight="1.2"
+                                android:text="Remaining Payment"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="12sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_remaining_pay"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.8"
+                                android:gravity="end"
+                                android:text=""
+                                android:layout_marginRight="20dp"
+                                android:paddingRight="15dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#373435"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edtsubmitremark"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/titlepayment"
+                        android:background="@drawable/edittext_shape_new"
+                        android:hint="Enter remark"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="15dp"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textColorHint="@color/black_87"
+                        android:textSize="14sp"
+                        android:theme="@style/MyEditTextThemeColor"
+                        android:visibility="visible" />
+
+
+
+                    <LinearLayout
+                        android:id="@+id/linearButton"
+                        android:layout_below="@+id/edtsubmitremark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardSubmit"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardBackgroundColor="@color/colur_dark_blue"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="2dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="Submit"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

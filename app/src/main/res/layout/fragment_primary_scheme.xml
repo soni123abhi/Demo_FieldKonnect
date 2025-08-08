@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_colour_two">
+
+    <FrameLayout
+        android:id="@+id/fragment_container_primary_report"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/linearTop_primary_report"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBack_primary_report"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_back" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvTitle_primary_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/cardBack_primary_report"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Primary Scheme Report"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rel_main_primary_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:layout_below="@+id/linearTop_primary_report">
+
+        <TextView
+            android:id="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Division"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtSearchdivision"
+            android:layout_below="@+id/textview33"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:clickable="false"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Division"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <TextView
+            android:id="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtSearchdivision"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Branch Name"
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtSearchbranch"
+            android:layout_below="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Branch"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_below="@+id/edtSearchbranch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Select Year"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtyear"
+            android:layout_below="@+id/textview1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select year"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_below="@+id/edtyear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Quarter"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtquarter"
+            android:layout_below="@+id/textview3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Quarter"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <TextView
+            android:id="@+id/textview44"
+            android:layout_below="@+id/edtquarter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Type"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtType"
+            android:layout_below="@+id/textview44"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Type"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+
+        <TextView
+            android:id="@+id/textview45"
+            android:layout_below="@+id/edtType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Select Primary Scheme"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <AutoCompleteTextView
+            android:id="@+id/edtScheme"
+            android:layout_below="@+id/textview45"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_shape_new"
+            android:focusable="false"
+            android:hint="Select Scheme"
+            android:fontFamily="@font/inter_regular"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_arrow_spinner"
+            android:textColorHint="@color/hintColor"
+            android:textSize="14sp"
+            android:theme="@style/MyEditTextThemeColor" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardshowww"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edtScheme"
+            android:layout_height="50dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginBottom="5dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/colur_dark_blue"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:text="Show Primary Scheme Report"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <RelativeLayout
+            android:id="@+id/rel_dealer_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/cardshowww"
+            android:visibility="gone">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_name"
+                            android:layout_width="170dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Delaer"
+                            android:textColor="#383838"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_lytm"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="@string/group_name"
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_cytm"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:text="Sales Qty."
+                            android:background="#ACE0F4"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_growth"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Sales Net Amount"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/title_remark"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:background="#ACE0F4"
+                            android:text="Discount (CN)"
+                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#BDBDBD"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_primary_scheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/report_primaryschemelayout"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

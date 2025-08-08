@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content"
+    android:weightSum="3"
+    app:cardCornerRadius="5dp"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_act_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Abhishek Soni"
+            android:layout_toLeftOf="@+id/cardbtn_create"
+            android:singleLine="true"
+            android:padding="3dp"
+            android:maxLines="2"
+            android:layout_marginRight="5dp"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardbtn_create"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@+id/cardbtn_view"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/colur_dark_blue"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tvscreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_semibold"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Create"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardbtn_view"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="2dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/colur_dark_blue"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tvsubmitt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_semibold"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="View"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

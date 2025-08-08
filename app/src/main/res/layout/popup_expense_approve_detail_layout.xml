@@ -1,0 +1,506 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colur_dark_blue"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+
+        <TextView
+            android:id="@+id/textview_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/img_close"
+            android:text="Expense Approval Detail"
+            android:textAlignment="center"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_cross_blue" />
+
+        <View
+            android:layout_below="@+id/textview_head"
+            android:id="@+id/vline1"
+            android:background="#EBEBEB"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vline1">
+
+
+        <RelativeLayout
+            android:id="@+id/reeell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/tv_expense_approve_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Approved by Name"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_expense_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="id"
+                android:layout_below="@+id/tv_expense_approve_by"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_expense_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="status"
+                android:layout_below="@+id/tv_expense_approve_by"
+                android:layout_toRightOf="@+id/tv_expense_num"
+                android:layout_toLeftOf="@+id/tv_expense_date"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#00D23B"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_expense_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="date"
+                android:layout_below="@+id/tv_expense_approve_by"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#837C7C"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_expense_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="type"
+                android:layout_below="@+id/tv_expense_num"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colur_light_blue"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/lin_amount_titl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_expense_type"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Claim Amt."
+                        android:textColor="#383838"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:text="Approved Amt."
+                        android:textColor="#383838"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_amount"
+                android:layout_below="@+id/lin_amount_titl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_claim_amt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:hint="clm amt"
+                        android:layout_gravity="center"
+                        android:drawableLeft="@drawable/ic_rupees"
+                        android:textStyle="bold"
+                        android:textColor="@color/colur_light_blue"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_approve_amt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:hint="approve amt"
+                        android:drawableLeft="@drawable/ic_rupees"
+                        android:textStyle="bold"
+                        android:textColor="@color/colur_light_blue"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Note :"
+                android:layout_below="@+id/lin_amount"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_note_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Test example "
+                android:layout_below="@+id/tv_note"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_note_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reason Note :"
+                android:layout_below="@+id/tv_note_msg"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_note_reason_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Test example "
+                android:layout_below="@+id/tv_note_reason"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="normal" />
+
+            <ListView
+                android:id="@+id/listView_attach_view"
+                android:layout_below="@+id/tv_note_reason_msg"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="2dp"
+                android:padding="0dp"
+                android:clipToPadding="false"/>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rel_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listView_attach_view"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/rel_tod_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_today_plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:text="Today's Plan :"
+                        android:textColor="#383838"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_tod_visit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/rel_tod_plan"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_today_visit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:text="Today's Visit :"
+                        android:textColor="#383838"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_total_visit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/rel_tod_visit"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_total_visit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:text="Total Visit :"
+                        android:textColor="#383838"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_total_km"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/rel_total_visit"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_total_km"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        android:singleLine="true"
+                        android:text="Total Km Run :"
+                        android:textColor="#383838"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:visibility="visible"
+                    android:layout_below="@+id/rel_total_km"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardbtn_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/colur_dark_blue"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:id="@+id/tvlocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_semibold"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="User Location"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_type"
+                android:layout_below="@+id/rel_plan"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/check_approve"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="60dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Approve"
+                        android:textStyle="bold"
+                        android:textColor="#00D23B"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/check_reject"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="40dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Reject"
+                        android:textStyle="bold"
+                        android:textColor="#FF0000"
+                        android:textSize="13sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardbtn_submit"
+                android:layout_width="90dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/lin_type"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/colur_dark_blue"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/tvsubmitt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_semibold"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

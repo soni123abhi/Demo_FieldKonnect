@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/lin_create_input_tour"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFF"
+        android:weightSum="3"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_date_create_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Select Date"
+            android:textColor="#383838"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#BDBDBD"/>
+
+        <TextView
+            android:id="@+id/tv_visit_create_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Select City"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#BDBDBD"/>
+        <TextView
+            android:id="@+id/tv_objective_create_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Select City"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vieeewww2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lin_create_input_tour"
+        android:background="#BDBDBD"/>
+
+
+</RelativeLayout>
