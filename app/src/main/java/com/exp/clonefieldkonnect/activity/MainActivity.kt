@@ -292,10 +292,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         val permissions = mutableListOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.READ_CALL_LOG,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_PHONE_NUMBERS,
-            Manifest.permission.CALL_PHONE
             )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

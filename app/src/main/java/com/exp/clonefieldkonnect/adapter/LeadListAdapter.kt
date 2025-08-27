@@ -1,17 +1,11 @@
 package com.exp.clonefieldkonnect.adapter
 
 
-import android.Manifest
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
-import android.provider.CallLog
-import android.telephony.PhoneStateListener
-import android.telephony.TelephonyManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +13,9 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.model.LeadModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<LeadModel.Data_lead>, var onClickEmail1: OnEmailClick) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -78,7 +68,8 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         
         statementHandler.img_call.setOnClickListener { 
             if (!item.contact!!.phoneNumber.isNullOrEmpty()){
-                opencalldialog(item.contact!!.phoneNumber)
+                Toast.makeText(activity,"Working on it..!!",Toast.LENGTH_SHORT).show()
+//                opencalldialog(item.contact!!.phoneNumber)
             }
         }
         statementHandler.img_msg.setOnClickListener { 
@@ -173,96 +164,6 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         }
     }*/
 
-
-    private fun opencalldialog(phoneNumber: String?) {
-        val callIntent = Intent(Intent.ACTION_CALL)
-        callIntent.data = Uri.parse("tel:${phoneNumber}")
-        activity.startActivity(callIntent)
-
-        // Call tracking trigger
-        CallTracker.startTracking(activity)
-
-        /*if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:${phoneNumber}")
-            activity.startActivity(callIntent)
-
-            // Call tracking trigger
-            CallTracker.startTracking(activity)
-        } else {
-            Toast.makeText(activity, "Call permission not granted", Toast.LENGTH_SHORT).show()
-        }*/
-    }
-
-
-    object CallTracker {
-
-        fun startTracking(activity: Activity) {
-            val telephonyManager = activity.getSystemService(Activity.TELEPHONY_SERVICE) as TelephonyManager
-
-            telephonyManager.listen(object : PhoneStateListener() {
-                override fun onCallStateChanged(state: Int, phoneNumber: String?) {
-                    super.onCallStateChanged(state, phoneNumber)
-
-                    if (state == TelephonyManager.CALL_STATE_IDLE) {
-                        // Call ended → check call log
-                        fetchLastCallDetails(activity)
-                    }
-                }
-            }, PhoneStateListener.LISTEN_CALL_STATE)
-        }
-
-        private fun fetchLastCallDetails(activity: Activity) {
-            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_CALL_LOG)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                Log.e("CallTracker", "READ_CALL_LOG permission not granted!")
-                return
-            }
-
-            val cursor = activity.contentResolver.query(
-                CallLog.Calls.CONTENT_URI,
-                null, null, null,
-                CallLog.Calls.DATE + " DESC"
-            )
-
-            cursor?.use {
-                if (it.moveToFirst()) {
-                    val number = it.getString(it.getColumnIndexOrThrow(CallLog.Calls.NUMBER))
-                    val typeCode = it.getInt(it.getColumnIndexOrThrow(CallLog.Calls.TYPE))
-                    val dateMillis = it.getLong(it.getColumnIndexOrThrow(CallLog.Calls.DATE))
-                    val durationSec = it.getLong(it.getColumnIndexOrThrow(CallLog.Calls.DURATION))
-
-                    val callType = when (typeCode) {
-                        CallLog.Calls.INCOMING_TYPE -> "Incoming"
-                        CallLog.Calls.OUTGOING_TYPE -> "Outgoing"
-                        CallLog.Calls.MISSED_TYPE -> "Missed"
-                        CallLog.Calls.REJECTED_TYPE -> "Rejected"
-                        else -> "Unknown"
-                    }
-
-                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-
-                    val date = dateFormat.format(Date(dateMillis))
-                    val time = timeFormat.format(Date(dateMillis))
-
-                    Log.d("CallTracker", "Number: $number")
-                    Log.d("CallTracker", "Type: $callType")
-                    Log.d("CallTracker", "Date: $date, Time: $time")
-                    Log.d("CallTracker", "Duration: ${durationSec}s")
-
-                    if (durationSec > 0) {
-                        Log.d("CallTracker", "✅ Call was connected")
-                    } else {
-                        Log.d("CallTracker", "❌ Call not connected")
-                    }
-                }
-            }
-        }
-    }
 
     private inner class StatementHandler internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {

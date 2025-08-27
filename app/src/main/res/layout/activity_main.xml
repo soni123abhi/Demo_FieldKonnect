@@ -500,7 +500,7 @@
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/ic_drawer_support"
                     android:drawablePadding="10dp"
-                    android:text="Customer Care - +91 9990828928"
+                    android:text="Customer Care - +91 9713113280"
                     android:textColor="#373435"
                     android:textSize="14sp" />
 
