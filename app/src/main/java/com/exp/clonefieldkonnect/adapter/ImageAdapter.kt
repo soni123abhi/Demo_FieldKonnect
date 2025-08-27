@@ -1,53 +1,48 @@
 package com.exp.clonefieldkonnect.adapter
 
-
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.connection.ApiClient
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.adapter_image.view.*
+import com.exp.clonefieldkonnect.databinding.AdapterImageBinding
 
-class ImageAdapter(val arr : ArrayList<String>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ImageAdapter(private val arr: ArrayList<String>) :
+    RecyclerView.Adapter<ImageAdapter.ItemViewHolder>() {
 
-    lateinit var mcontext: Context
-    val arrInt : ArrayList<Int> = arrayListOf()
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private lateinit var mContext: Context
+    private val arrInt: ArrayList<Int> = arrayListOf()
 
+    // ViewHolder uses ViewBinding
+    class ItemViewHolder(val binding: AdapterImageBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        mcontext = parent.context
-
-        val v = LayoutInflater.from(mcontext).inflate(R.layout.adapter_image, parent, false)
-        return ItemViewHolder(v)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        val binding = AdapterImageBinding.inflate(LayoutInflater.from(mContext), parent, false)
+        return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val imageUrl = ApiClient.BASE_IMAGE_URL + arr[position]
 
-        Glide.with(mcontext).load(ApiClient.BASE_IMAGE_URL+arr[position]).into(holder.itemView.img)
+        Glide.with(mContext)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_launcher_background) // optional
+            .into(holder.binding.img)
 
-        holder.itemView.imgDelete.tag = position
-
-        holder.itemView.imgDelete.setOnClickListener { view ->
-
-            val pos = view.tag as Int
-            arr.removeAt(pos)
-            notifyDataSetChanged()
-            arrInt.add(pos)
+        holder.binding.imgDelete.setOnClickListener {
+            arr.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, arr.size)
+            arrInt.add(position)
         }
     }
 
-    fun deletePos() : ArrayList<Int>{
+    fun deletePos(): ArrayList<Int> {
         return arrInt
     }
 
-    override fun getItemCount(): Int {
-        return arr.size
-    }
-
+    override fun getItemCount(): Int = arr.size
 }

@@ -1,43 +1,37 @@
 package com.exp.clonefieldkonnect.adapter
 
-
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.exp.clonefieldkonnect.R
-import com.exp.clonefieldkonnect.connection.ApiClient
-import com.exp.clonefieldkonnect.model.SalesImageModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.adapter_image.view.*
+import com.exp.clonefieldkonnect.connection.ApiClient
+import com.exp.clonefieldkonnect.databinding.AdapterImageBinding
+import com.exp.clonefieldkonnect.model.SalesImageModel
 
-class SalesImageAdapter(val arr : ArrayList<SalesImageModel>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SalesImageAdapter(private val arr: ArrayList<SalesImageModel>) :
+    RecyclerView.Adapter<SalesImageAdapter.ItemViewHolder>() {
 
-    lateinit var mcontext: Context
-    val arrInt : ArrayList<Int> = arrayListOf()
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private lateinit var mContext: Context
 
+    inner class ItemViewHolder(val binding: AdapterImageBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        mcontext = parent.context
-
-        val v = LayoutInflater.from(mcontext).inflate(R.layout.adapter_image, parent, false)
-        return ItemViewHolder(v)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        val binding = AdapterImageBinding.inflate(LayoutInflater.from(mContext), parent, false)
+        return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val item = arr[position]
 
-        Glide.with(mcontext).load(ApiClient.BASE_IMAGE_URL+arr[position].file_path).into(holder.itemView.img)
+        Glide.with(mContext)
+            .load(ApiClient.BASE_IMAGE_URL + item.file_path)
+            .into(holder.binding.img)
 
-        holder.itemView.relativeDelete.visibility = View.GONE
+        holder.binding.relativeDelete.visibility = android.view.View.GONE
     }
 
-
-    override fun getItemCount(): Int {
-        return arr.size
-    }
-
+    override fun getItemCount(): Int = arr.size
 }

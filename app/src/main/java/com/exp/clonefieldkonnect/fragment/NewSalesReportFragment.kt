@@ -9,13 +9,23 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -30,11 +40,10 @@ import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.DistriutorModel
 import com.exp.clonefieldkonnect.model.SalessListModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_new_sales_report.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 
 class NewSalesReportFragment(
@@ -48,6 +57,7 @@ class NewSalesReportFragment(
     lateinit var tvTitle_sales_report: TextView
     lateinit var tvNoDta: TextView
     lateinit var linearTop_sales_report: CardView
+    lateinit var fragment_container_sales_report: FrameLayout
     lateinit var cardBack_sales_back: CardView
     lateinit var rel_main_sales_report: RelativeLayout
     lateinit var recyclerView_orderr: RecyclerView
@@ -99,6 +109,7 @@ class NewSalesReportFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardBack_sales_back = rootView.findViewById(R.id.cardBack_sales_back)
+        fragment_container_sales_report = rootView.findViewById(R.id.fragment_container_sales_report)
         tvTitle_sales_report = rootView.findViewById(R.id.tvTitle_sales_report)
         linearTop_sales_report = rootView.findViewById(R.id.linearTop_sales_report)
         rel_main_sales_report = rootView.findViewById(R.id.rel_main_sales_report)

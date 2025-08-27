@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#e7e7e7">
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <androidx.cardview.widget.CardView
@@ -86,97 +87,103 @@
             </RelativeLayout>
 
 
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/searchBox"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_below="@+id/cardBack"
-            android:layout_marginTop="10dp">
-
             <LinearLayout
+                android:id="@+id/topControls"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#182D69"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-            <EditText
-                android:id="@+id/searchInput"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:hint="Search here"
-                android:background="@android:color/transparent"
-                android:textColorHint="#FFFFFF"
-                android:textColor="#FFFFFF" />
-
-            <ImageView
-                android:id="@+id/searchIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_search_customer"
-                app:tint="@android:color/white" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_opoo_btn"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cardBack"
-                android:layout_toRightOf="@+id/searchBox"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="110dp"
-                    android:background="@color/green"
-                    android:layout_height="40dp">
-
-                    <ImageView
-                        android:id="@+id/oppppp"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="7dp"
-                        android:src="@drawable/ic_opportunity" />
-
-
-                    <TextView
-                        android:id="@+id/opportunityBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_toRightOf="@+id/oppppp"
-                        android:backgroundTint="@color/green"
-                        android:layout_marginTop="10dp"
-                        android:text="Opportunity"
-                        android:textColor="@android:color/white" />
-
-                </RelativeLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-
-            <ImageView
-                android:id="@+id/filter"
-                android:layout_toRightOf="@+id/card_opoo_btn"
-                android:layout_below="@+id/cardBack"
-                android:layout_alignParentEnd="true"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center_vertical"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_lead_filter" />
+                android:weightSum="1">
+
+                <!-- Search Box -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/searchBox"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.56"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#182D69"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp">
+
+                        <EditText
+                            android:id="@+id/searchInput"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:hint="Search here"
+                            android:background="@android:color/transparent"
+                            android:textColorHint="#FFFFFF"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/searchIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_search_customer"
+                            app:tint="@android:color/white" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Opportunity Button -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_opoo_btn"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.34"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/green">
+
+                        <ImageView
+                            android:id="@+id/oppppp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_opportunity" />
+
+                        <TextView
+                            android:id="@+id/opportunityBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/oppppp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="3dp"
+                            android:text="Opportunity"
+                            android:textColor="@android:color/white" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Filter Icon -->
+                <ImageView
+                    android:id="@+id/filter"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.10"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/ic_lead_filter"
+                    android:scaleType="centerInside" />
+
+            </LinearLayout>
+
 
 
 
@@ -184,52 +191,63 @@
 
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/rel_lead_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearTop"
-        android:background="#FFF">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_lead_status"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/linearTop"
+        android:background="#e7e7e7"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rel_lead_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:nestedScrollingEnabled="false"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            tools:itemCount="1"
-            tools:listitem="@layout/lead_status_layout"
+            android:background="#FFF">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_lead_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                tools:itemCount="1"
+                tools:listitem="@layout/lead_status_layout"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_useractivity"
+            android:layout_below="@+id/rel_lead_layout"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/lead_listing_layout"/>
+
+
+        <ImageView
+            android:id="@+id/img_create"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add_blue2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp" />
+
 
     </RelativeLayout>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_useractivity"
-        android:layout_below="@+id/rel_lead_layout"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/lead_listing_layout"/>
-
-
-    <ImageView
-        android:id="@+id/img_create"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:src="@drawable/ic_add_blue2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.activity.NewSalesDetailActivity
 import com.exp.clonefieldkonnect.model.SalessListModel
-import kotlinx.android.synthetic.main.adapter_sales.view.*
-import kotlinx.android.synthetic.main.adapter_user_city.view.*
 
 class SalesListNewAdapter(var activity: Activity, var orderListArr: java.util.ArrayList<SalessListModel.sales_Data>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

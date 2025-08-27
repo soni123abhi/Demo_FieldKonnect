@@ -1,31 +1,28 @@
 package com.exp.clonefieldkonnect.adapter
 
-
 import android.content.Context
 import android.os.Handler
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.exp.clonefieldkonnect.R
+import com.exp.clonefieldkonnect.databinding.AdapterOutstandingBinding
+import com.exp.clonefieldkonnect.databinding.ProgressLoadingBinding
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.model.OutstandingModel
-import kotlinx.android.synthetic.main.adapter_outstanding.view.*
-import kotlinx.android.synthetic.main.adapter_sales.view.relativeMainSales
-import kotlinx.android.synthetic.main.adapter_sales.view.tvAmount
-import kotlinx.android.synthetic.main.adapter_sales.view.tvDate
 
-class OutstandingAdapter(private var statementArr : ArrayList<OutstandingModel.Data?> ) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OutstandingAdapter(
+    private var statementArr: ArrayList<OutstandingModel.Data?>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private lateinit var mContext: Context
 
-    lateinit var mcontext: Context
+    // Item ViewHolder using ViewBinding
+    class ItemViewHolder(val binding: AdapterOutstandingBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
+    // Loading ViewHolder using ViewBinding
+    class LoadingViewHolder(val binding: ProgressLoadingBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     fun addData(dataViews: List<OutstandingModel.Data?>) {
         this.statementArr.addAll(dataViews)
@@ -33,7 +30,6 @@ class OutstandingAdapter(private var statementArr : ArrayList<OutstandingModel.D
     }
 
     fun addLoadingView() {
-        //add loading item
         Handler().post {
             statementArr.add(null)
             notifyItemInserted(statementArr.size - 1)
@@ -41,57 +37,51 @@ class OutstandingAdapter(private var statementArr : ArrayList<OutstandingModel.D
     }
 
     fun removeLoadingView() {
-        //Remove loading item
         if (statementArr.size != 0) {
             statementArr.removeAt(statementArr.size - 1)
             notifyItemRemoved(statementArr.size)
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        mcontext = parent.context
+        mContext = parent.context
 
         return if (viewType == Constant.VIEW_TYPE_ITEM) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_outstanding, parent, false)
-            ItemViewHolder(view)
+            val binding = AdapterOutstandingBinding.inflate(
+                LayoutInflater.from(mContext),
+                parent,
+                false
+            )
+            ItemViewHolder(binding)
         } else {
-            val view = LayoutInflater.from(mcontext).inflate(R.layout.progress_loading, parent, false)
-
-            LoadingViewHolder(view)
+            val binding = ProgressLoadingBinding.inflate(
+                LayoutInflater.from(mContext),
+                parent,
+                false
+            )
+            LoadingViewHolder(binding)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemViewHolder) {
+            val item = statementArr[position] ?: return
 
-        if (holder.itemViewType == Constant.VIEW_TYPE_ITEM) {
+            with(holder.binding) {
+                tvRefNo.text = item.reference_no ?: ""
+                tvType.text = item.payment_type ?: ""
+                tvMode.text = (item.payment_mode ?: "").toString()
+                tvDate.text = item.payment_date ?: ""
+                tvAmount.text = item.amount ?: ""
 
-            holder.itemView.tvRefNo.text = statementArr[position]!!.reference_no.toString()
-            holder.itemView.tvType.text = statementArr[position]!!.payment_type.toString()
-            holder.itemView.tvMode.text = statementArr[position]!!.payment_mode.toString()
-            holder.itemView.tvDate.text =
-                statementArr!![position]!!.payment_date.toString()
-              holder.itemView.tvAmount.text = statementArr[position]!!.amount.toString()
-
-            holder.itemView.relativeMainSales.tag = position
-            holder.itemView.relativeMainSales.setOnClickListener { view ->
-
-              /*  val pos = view.tag as Int
-                val intent = Intent( mcontext, OrderDetailsActivity::class.java)
-                intent.putExtra("id",statementArr[pos]!!.orderId)
-                intent.putExtra("name",statementArr[pos]!!.buyerName)
-                intent.putExtra("no",statementArr[pos]!!.orderno)
-                mcontext.startActivity(intent)*/
-
+                relativeMainSales.setOnClickListener {
+                    // handle click here if needed
+                }
             }
         }
     }
 
-
-    override fun getItemCount(): Int {
-        return statementArr!!.size
-
-    }
+    override fun getItemCount(): Int = statementArr.size
 
     override fun getItemViewType(position: Int): Int {
         return if (statementArr[position] == null) {
@@ -100,7 +90,4 @@ class OutstandingAdapter(private var statementArr : ArrayList<OutstandingModel.D
             Constant.VIEW_TYPE_ITEM
         }
     }
-
-
-
 }

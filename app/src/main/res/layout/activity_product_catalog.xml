@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/bg_colour_two">
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark">
 
 
     <androidx.cardview.widget.CardView
@@ -56,10 +57,17 @@
 
     </androidx.cardview.widget.CardView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/linearTop_report"
+        android:background="@color/bg_colour_two"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_pro"
-        android:layout_below="@+id/linearTop_report"
         android:layout_marginTop="8dp"
         android:visibility="visible"
         android:layout_width="match_parent"

@@ -13,7 +13,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -39,12 +50,10 @@ import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_tour.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Locale
 
 
 class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tabPosition: Int, tvTitle: TextView) : Fragment(),View.OnClickListener,UserTourUseradapter.OnEmailClick,TourViewDetailAdapter.OnEmailClick {
@@ -55,6 +64,7 @@ class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tab
     lateinit var rec_user_main: RelativeLayout
     lateinit var rec_tour_create: RelativeLayout
     lateinit var rec_tour_view: RelativeLayout
+    lateinit var fragment_container_tour: FrameLayout
     lateinit var tour_view_table: RelativeLayout
     lateinit var cardSearch: RelativeLayout
     lateinit var linearTop_tour: CardView
@@ -126,6 +136,7 @@ class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tab
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardBack_tour = rootView.findViewById(R.id.cardBack_tour)
+        fragment_container_tour = rootView.findViewById(R.id.fragment_container_tour)
         linearTop_tour = rootView.findViewById(R.id.linearTop_tour)
         recyclerView_useractivity = rootView.findViewById(R.id.recyclerView_useractivity)
         recyclerview_tour_view_table = rootView.findViewById(R.id.recyclerview_tour_view_table)

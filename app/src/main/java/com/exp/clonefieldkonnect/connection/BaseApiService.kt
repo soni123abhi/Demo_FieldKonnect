@@ -54,6 +54,7 @@ import com.exp.clonefieldkonnect.model.SpecialDiscountModel
 import com.exp.clonefieldkonnect.model.StateModel
 import com.exp.clonefieldkonnect.model.StoreCustomerRequestModel
 import com.exp.clonefieldkonnect.model.TaskDropdownModel
+import com.exp.clonefieldkonnect.model.TaskManagemnetModel
 import com.exp.clonefieldkonnect.model.UnpaidInvoiceModel
 import com.exp.clonefieldkonnect.model.UserActiveModel
 import com.exp.clonefieldkonnect.model.UserActivityListModel
@@ -630,6 +631,12 @@ interface BaseApiService {
         @QueryMap queryParams: Map<String, String>,
     ): Call<LeadTaskModel>
 
+    @GET("getOtherTasks")
+    abstract fun gettaskmanagementt(
+        @Header("Authorization") authorization: String?,
+        @QueryMap queryParams: Map<String, String>,
+    ): Call<TaskManagemnetModel>
+
     @GET("getAllLeadNotifications")
     abstract fun getnotificationn(
         @Header("Authorization") authorization: String?,
@@ -916,6 +923,15 @@ interface BaseApiService {
         @Header("Authorization") authorization: String?,
         @QueryMap queryParams: Map<String, String>,
     ): Call<AttendanceSubmitModel>
+
+
+    @Multipart
+    @POST("changeOtherTaskStatus")
+    abstract fun submittaskmanagementstatus(
+        @Header("Authorization") authorization: String?,
+        @QueryMap queryParams: Map<String, String>,
+        @Part file: List<MultipartBody.Part>,
+        ): Call<AttendanceSubmitModel>
 
     @POST("readNotification")
     abstract fun callreadnotificationn(

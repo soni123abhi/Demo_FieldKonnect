@@ -54,6 +54,7 @@ import com.exp.clonefieldkonnect.model.SarthiPointsModel
 import com.exp.clonefieldkonnect.model.SpecialDiscountModel
 import com.exp.clonefieldkonnect.model.StateModel
 import com.exp.clonefieldkonnect.model.TaskDropdownModel
+import com.exp.clonefieldkonnect.model.TaskManagemnetModel
 import com.exp.clonefieldkonnect.model.UnpaidInvoiceModel
 import com.exp.clonefieldkonnect.model.UserActiveModel
 import com.exp.clonefieldkonnect.model.UserActivityListModel
@@ -1063,6 +1064,27 @@ class ApiClient {
             })
         }
 
+        fun gettaskmanagemnet(
+            token: String,
+            queryParams: Map<String, String>,
+            resultLitener: APIResultLitener<TaskManagemnetModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().gettaskmanagementt(token, queryParams)
+
+            apiResponseCall.enqueue(object : Callback<TaskManagemnetModel> {
+                override fun onResponse(
+                    call: Call<TaskManagemnetModel>, response: retrofit2.Response<TaskManagemnetModel>
+                ) {
+
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<TaskManagemnetModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
         fun getnotification(
             token: String,
             queryParams: Map<String, String>,
@@ -1896,6 +1918,27 @@ class ApiClient {
             resultLitener: APIResultLitener<AttendanceSubmitModel>
         ) {
             val apiResponseCall = getBaseApiServiceInstance1().submittaskstatus(token, queryParams)
+
+            apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
+                override fun onResponse(
+                    call: Call<AttendanceSubmitModel>, response: retrofit2.Response<AttendanceSubmitModel>
+                ) {
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<AttendanceSubmitModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
+        fun submittaskmanagementstatus(
+            token: String,
+            queryParams: Map<String, String>,
+            multipartParts: List<MultipartBody.Part>,
+            resultLitener: APIResultLitener<AttendanceSubmitModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().submittaskmanagementstatus(token, queryParams,multipartParts)
 
             apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
                 override fun onResponse(

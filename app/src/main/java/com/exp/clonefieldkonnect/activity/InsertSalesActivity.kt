@@ -1,10 +1,11 @@
 package com.exp.clonefieldkonnect.activity
 
+//import gun0912.tedimagepicker.builder.TedImagePicker
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -12,9 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.exp.import.Utilities
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.adapter.ImageAdapter
 import com.exp.clonefieldkonnect.connection.APIResultLitener
@@ -24,11 +25,15 @@ import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.DistriutorModel
 import com.exp.clonefieldkonnect.model.InsertSalesRequestModel
+import com.exp.import.Utilities
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonObject
-import gun0912.tedimagepicker.builder.TedImagePicker
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -435,7 +440,7 @@ class InsertSalesActivity : AppCompatActivity(), View.OnClickListener {
 
                     }
 
-                    TedImagePicker.with(this@InsertSalesActivity)
+                   /* TedImagePicker.with(this@InsertSalesActivity)
                         //.mediaType(MediaType.IMAGE)
                         //.scrollIndicatorDateFormat("YYYYMMDD")
                         //.buttonGravity(ButtonGravity.BOTTOM)
@@ -444,7 +449,7 @@ class InsertSalesActivity : AppCompatActivity(), View.OnClickListener {
                         .max(5, "You have selected 5 Images")
                         .startMultiImage { list: List<Uri> ->
                             showMultiImage(list.toMutableList())
-                        }
+                        }*/
 
                 } else {
                     // Permission Denied
@@ -462,22 +467,25 @@ class InsertSalesActivity : AppCompatActivity(), View.OnClickListener {
     private fun showMultiImage(uriList: MutableList<Uri>) {
         this.selectedUriList = uriList
         finalPath.clear()
-        for (value in uriList) {
 
-            var compressedImageFile =
-                Compressor(this@InsertSalesActivity).setMaxHeight(200).setMaxWidth(200)
-                    .setQuality(90).compressToFile(File(value.path))
+        lifecycleScope.launch {
+            for (value in uriList) {
+                val file = File(value.path ?: continue)
 
-            finalPath!!.add(compressedImageFile.path)
+                // ✅ Use new Compressor API
+                val compressedImageFile = Compressor.compress(this@InsertSalesActivity, file) {
+                    resolution(200, 200)   // replaces setMaxHeight / setMaxWidth
+                    quality(90)            // replaces setQuality
+                    format(Bitmap.CompressFormat.JPEG)
+                }
 
-            //  fileImagge.add(File(value.path))
+                finalPath.add(compressedImageFile.path)
+            }
+
+            val layoutManager = GridLayoutManager(this@InsertSalesActivity, 3)
+            recyclerView.layoutManager = layoutManager
+            recyclerView.setNestedScrollingEnabled(false)
+            imageAdapter = ImageAdapter(finalPath)
+            recyclerView.adapter = imageAdapter
         }
-
-        val layoutManager = GridLayoutManager(this@InsertSalesActivity, 3)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.setNestedScrollingEnabled(false);
-        imageAdapter = ImageAdapter(finalPath)
-        recyclerView.adapter = imageAdapter
-
-    }
-}
+    }}

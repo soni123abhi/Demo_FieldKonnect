@@ -9,12 +9,22 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devstune.searchablemultiselectspinner.SearchableItem
@@ -34,12 +44,10 @@ import com.exp.clonefieldkonnect.model.NewDealerViewDetailMOdel
 import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_dealer_approal.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Locale
 
 
 class DealerApproalFragment(
@@ -58,6 +66,8 @@ class DealerApproalFragment(
     lateinit var tvTitle_dealer_approval: TextView
     lateinit var cardSearch: RelativeLayout
     lateinit var rel_main_dealer: RelativeLayout
+    lateinit var linearTop_dealer_approval: CardView
+    lateinit var fragment_container_dealer_approval: FrameLayout
     lateinit var cardBack_dealer_approval: CardView
     lateinit var edtSearchbranch: AutoCompleteTextView
     lateinit var edtSearch: AutoCompleteTextView
@@ -110,6 +120,8 @@ class DealerApproalFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardFrom = rootView.findViewById(R.id.cardFrom)
+        linearTop_dealer_approval = rootView.findViewById(R.id.linearTop_dealer_approval)
+        fragment_container_dealer_approval = rootView.findViewById(R.id.fragment_container_dealer_approval)
         cardTo = rootView.findViewById(R.id.cardTo)
         cardSearch = rootView.findViewById(R.id.cardSearch)
         tvFrom = rootView.findViewById(R.id.tvFrom)

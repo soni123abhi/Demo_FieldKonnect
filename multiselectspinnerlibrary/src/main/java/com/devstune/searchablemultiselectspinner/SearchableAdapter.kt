@@ -4,11 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.row_multi_select_item.view.*
-import java.util.*
+import java.util.Locale
 
 class SearchableAdapter(
     internal var context: Context,
@@ -22,8 +23,10 @@ class SearchableAdapter(
     inner class ViewHolder(val mView: View) :
         RecyclerView.ViewHolder(mView) {
 
-        internal var titleTextView = mView.titleTextView
-        internal var checkBox = mView.checkBox
+        internal val titleTextView: TextView = mView.findViewById(R.id.titleTextView)
+        internal val checkBox: CheckBox = mView.findViewById(R.id.checkBox)
+//        internal var titleTextView = mView.titleTextView
+//        internal var checkBox = mView.checkBox
 
         var mItem: SearchableItem? = null
 

@@ -30,6 +30,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <RelativeLayout
+        android:id="@+id/rell_attachement"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Attachment"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#383838"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/textview41"
+            android:layout_toRightOf="@+id/textview4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="(Should be less then 5 MB)"
+            android:layout_marginLeft="-5dp"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#C53636"
+            android:textStyle="bold"
+            android:textColorHint="@color/hintColor"
+            android:textSize="13sp" />
+
+
+        <ImageView
+            android:id="@+id/img_add_attachment"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textview4"
+            android:src="@drawable/ic_add_attachment" />
+
+
+        <ListView
+            android:id="@+id/listView_attach"
+            android:layout_below="@+id/img_add_attachment"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="2dp"
+            android:padding="0dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -54,7 +55,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import id.zelory.compressor.Compressor
-import kotlinx.android.synthetic.main.activity_counter.view.*
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -1443,149 +1444,91 @@ class StoreCustomerActivity : AppCompatActivity(), View.OnClickListener {
     var outletImgFile: File? = null
     var visitingCardImgFile: File? = null
 
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == INTENTCAMERA) {
-            if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == INTENTCAMERA && resultCode == Activity.RESULT_OK) {
+            try {
+                val path: File = data?.getSerializableExtra("image") as File
+                cameraFile = path
+                imageFile = path.path
 
-                try {
-                    //   val path =    cameraFile
-                    var path: File = data!!.getSerializableExtra("image") as File
-                    Log.v("akram", "path " + arrList.size)
-                    //  compressImage(path)
-                    cameraFile = path
-                    //  var bitmap = getBitmap(path.path)
-
-                    //imageFile = Compressor(this@MyProfileActivity).compressToFile(path)
-                    imageFile = path.path
-
-                    var compressedImageFile: File? = null
+                lifecycleScope.launch {
                     try {
-                        compressedImageFile =
-                            Compressor(this@StoreCustomerActivity).setMaxHeight(200)
-                                .setMaxWidth(200)
-                                .setQuality(90).compressToFile(path)
+                        val compressedImageFile = Compressor.compress(this@StoreCustomerActivity, path)
+
+                        handleSelectedImage(compressedImageFile, path.path)
+
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-
-                    base64 = ""
-
-                    if (selectedImg == "outlet") {
-                        outletImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgProfile)
-                        outletImg = base64
-                    } else if (selectedImg == "gst") {
-                        gstImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgGST)
-                        gstImg = base64
-                    } else if (selectedImg == "adhar") {
-                        adharImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgAdhar)
-                        adharImg = base64
-                    } else if (selectedImg == "pan") {
-                        panImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgPAN)
-                        panImg = base64
-                    } else if (selectedImg == "other") {
-                        otherImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgOther)
-                        otherImg = base64
-                    } else if (selectedImg == "card") {
-                        visitingCardImgFile = compressedImageFile
-                        Glide.with(this)
-                            .load(path.path)
-                            .into(imgProfile2)
-                        cardImg = base64
-                    }
-                } catch (e: Exception) {
-
-                    Log.v("akram", "tri inside")
                 }
 
+            } catch (e: Exception) {
+                Log.v("StoreCustomerActivity", "Camera error: ${e.localizedMessage}")
             }
-        } else if (requestCode == INTENTGALLERY) {
+        }
+        else if (requestCode == INTENTGALLERY && resultCode == Activity.RESULT_OK) {
 
-            if (resultCode == Activity.RESULT_OK) {
+            val selectedImageUri: Uri = data?.data ?: return
+            val tempPath = Utilities.getPathFromUri(selectedImageUri, this@StoreCustomerActivity)
+            val file = File(tempPath)
 
-                val selectedImageUri: Uri = data!!.data!!
-
-                val tempPath =
-                    Utilities.getPathFromUri(selectedImageUri, this@StoreCustomerActivity)
-
-                val file = File(tempPath)
-
-
-                var compressedImageFile: File? = null
+            lifecycleScope.launch {
                 try {
-                    compressedImageFile =
-                        Compressor(this@StoreCustomerActivity).setMaxHeight(200).setMaxWidth(200)
-                            .setQuality(90).compressToFile(file)
+                    val compressedImageFile = Compressor.compress(this@StoreCustomerActivity, file)
+
+                    handleSelectedImage(compressedImageFile, tempPath)
+
+                    imageFile = tempPath
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
-                base64 = ""
-
-                if (selectedImg == "outlet") {
-                    outletImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgProfile)
-                    outletImg = base64
-                } else if (selectedImg == "gst") {
-                    gstImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgGST)
-                    gstImg = base64
-                } else if (selectedImg == "adhar") {
-                    adharImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgAdhar)
-                    adharImg = base64
-                } else if (selectedImg == "pan") {
-                    panImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgPAN)
-                    panImg = base64
-                } else if (selectedImg == "other") {
-                    otherImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgOther)
-                    otherImg = base64
-                } else if (selectedImg == "card") {
-                    visitingCardImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgProfile2)
-                    cardImg = base64
-                }
-
-                imageFile = tempPath
-
-
             }
-        } else if (requestCode == REQUEST_CHECK_SETTINGS) {
-            if (resultCode == Activity.RESULT_OK) {
-                gettingLocation()
+        } else if (requestCode == REQUEST_CHECK_SETTINGS && resultCode == Activity.RESULT_OK) {
+            gettingLocation()
+        }
+    }
+
+
+    private fun handleSelectedImage(compressedImageFile: File, originalPath: String) {
+        base64 = ""
+
+        when (selectedImg) {
+            "outlet" -> {
+                outletImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgProfile)
+                outletImg = base64
+            }
+            "gst" -> {
+                gstImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgGST)
+                gstImg = base64
+            }
+            "adhar" -> {
+                adharImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgAdhar)
+                adharImg = base64
+            }
+            "pan" -> {
+                panImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgPAN)
+                panImg = base64
+            }
+            "other" -> {
+                otherImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgOther)
+                otherImg = base64
+            }
+            "card" -> {
+                visitingCardImgFile = compressedImageFile
+                Glide.with(this).load(originalPath).into(imgProfile2)
+                cardImg = base64
             }
         }
     }
+
 
 
     private fun getSurveyQuestions(customerType: String = "") {

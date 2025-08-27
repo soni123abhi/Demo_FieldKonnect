@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.activity.OrderDetailEditActivity
 import com.exp.clonefieldkonnect.model.ClusterOrderListModel
-import kotlinx.android.synthetic.main.adapter_sales.view.*
 import kotlin.collections.ArrayList
 
 class ClusterOrderListAdapter(var activity: Activity, var orderListArr: ArrayList<ClusterOrderListModel.Datum?>) :

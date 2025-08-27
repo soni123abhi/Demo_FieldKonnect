@@ -10,13 +10,24 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RadioGroup
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devstune.searchablemultiselectspinner.SearchableItem
@@ -40,11 +51,11 @@ import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_expense_approval.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class ExpenseApprovalFragment(
     var cardBack: CardView,
@@ -57,6 +68,7 @@ class ExpenseApprovalFragment(
     private lateinit var recyclerView_expense_approval: RecyclerView
     private lateinit var recyclerView_user_detail: RecyclerView
     private lateinit var linearTop_expense_approval: CardView
+    private lateinit var fragment_container_expense_approval: FrameLayout
     private lateinit var cardBack_expense_approval: CardView
     lateinit var tvTitle_expense_approval: TextView
     lateinit var cardFrom: LinearLayout
@@ -380,6 +392,7 @@ class ExpenseApprovalFragment(
 
     private fun initViews() {
         linearTopreport.visibility = View.GONE
+        fragment_container_expense_approval = rootView.findViewById(R.id.fragment_container_expense_approval)
         cardBack_expense_approval = rootView.findViewById(R.id.cardBack_expense_approval)
         linearTop_expense_approval = rootView.findViewById(R.id.linearTop_expense_approval)
         recyclerView_expense_approval = rootView.findViewById(R.id.recyclerView_expense_approval)
@@ -607,6 +620,7 @@ class ExpenseApprovalFragment(
         val tv_note_msg: TextView = view.findViewById(R.id.tv_note_msg)
         val tv_note_reason: TextView = view.findViewById(R.id.tv_note_reason)
         val tv_note_reason_msg: TextView = view.findViewById(R.id.tv_note_reason_msg)
+        val tv_user_date: TextView = view.findViewById(R.id.tv_user_date)
         val listView_attach_view: ListView = view.findViewById(R.id.listView_attach_view)
 
         val tv_today_plan: TextView = view.findViewById(R.id.tv_today_plan)
@@ -702,7 +716,7 @@ class ExpenseApprovalFragment(
             tvTitle_expense_approval.text = "User Activity"
             alertDialog.dismiss()
             flag = "2"
-            getuseractivitydetail(id,date)
+            getuseractivitydetail(id,date,tv_user_date)
         }
 
         when (data.status.toString()) {
@@ -760,7 +774,7 @@ class ExpenseApprovalFragment(
     }
 
 
-    private fun getuseractivitydetail(id: Int?, date: String?) {
+    private fun getuseractivitydetail(id: Int?, date: String?, tv_user_date: TextView) {
         println("ABhbbb="+id+"<<<"+date)
         if (!Utilities.isOnline(activityLocal)) {
             return

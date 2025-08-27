@@ -182,14 +182,23 @@ class NotificationActivity : AppCompatActivity(),NotificationAdapter.OnEmailClic
                         if (response.code() == 200) {
                             Toast.makeText(this@NotificationActivity, response.body()!!.message, Toast.LENGTH_LONG).show()
                             page = 1
-                            if (model.equals("task")){
-                                startActivity(Intent(this@NotificationActivity,TaskActivity::class.java))
-                            }else if (model.equals("opportunity")){
+                            if (model.equals("opportunity")){
                                 startActivity(Intent(this@NotificationActivity,OpportunityViewActivity::class.java))
                             }else if (model.equals("lead")){
                                 startActivity(Intent(this@NotificationActivity,LeadActivity::class.java))
                             }
-//                            getnotification(page)
+                            else if (model.equals("task")){
+                                var intent = Intent(this@NotificationActivity, TaskActivity::class.java)
+                                intent.putExtra("notification_tag",model)
+                                startActivity(intent)
+                            }
+                            else if (model.equals("task_management")){
+                                var intent = Intent(this@NotificationActivity, TaskActivity::class.java)
+                                intent.putExtra("notification_tag",model)
+                                startActivity(intent)
+                            }else{
+                                startActivity(Intent(this@NotificationActivity,LeadActivity::class.java))
+                            }
                         } else {
                             val jsonObject: JSONObject
                             try {

@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/bg_colour_two"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -125,7 +126,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:background="@color/bg_colour_two"
             android:clipToPadding="false"
             android:paddingBottom="20dp"

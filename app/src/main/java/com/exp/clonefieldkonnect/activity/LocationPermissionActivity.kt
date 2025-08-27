@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import com.exp.clonefieldkonnect.R
-import kotlinx.android.synthetic.main.activity_add_task.*
-import kotlinx.android.synthetic.main.activity_visit_report.*
 
 class LocationPermissionActivity : AppCompatActivity() {
     lateinit var cardAllow: CardView

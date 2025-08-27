@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour_two"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/bg_colour_two"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
@@ -1341,6 +1343,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.5dp"
+                            android:visibility="gone"
                             android:background="#9F9E9E" />
 
                         <LinearLayout

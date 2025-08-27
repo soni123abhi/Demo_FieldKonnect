@@ -6,7 +6,9 @@
         <item name="colorPrimary">@color/colur_dark_blue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
     <style name="AppTheme_Material" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colur_dark_blue</item>

@@ -7,21 +7,18 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.activity.CounterDashboardActivity
+import com.exp.clonefieldkonnect.databinding.AdapterBeatCustomerBinding
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.BeatCustomerModel
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.adapter_beat_customer.view.*
-import kotlinx.android.synthetic.main.adapter_beat_customer.view.tvName
 
 
 class BeatCustomerAdapter(
@@ -35,7 +32,8 @@ class BeatCustomerAdapter(
     lateinit var mcontext: Context
 
     class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ItemViewHolder(val binding: AdapterBeatCustomerBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     fun addData(dataViews: List<BeatCustomerModel?>) {
         this.arr.addAll(dataViews)
@@ -67,157 +65,147 @@ class BeatCustomerAdapter(
         mcontext = parent.context
 
         return if (viewType == Constant.VIEW_TYPE_ITEM) {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_beat_customer, parent, false)
-            ItemViewHolder(view)
+            val binding = AdapterBeatCustomerBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            ItemViewHolder(binding)
         } else {
-            val view =
-                LayoutInflater.from(mcontext).inflate(R.layout.progress_loading, parent, false)
+            val view = LayoutInflater.from(mcontext).inflate(R.layout.progress_loading, parent, false)
             LoadingViewHolder(view)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemViewHolder) {
+            val customer = arr[position]!!
 
-        if (holder.itemViewType == Constant.VIEW_TYPE_ITEM) {
+            holder.binding.tvName.text = customer.customerName
+            holder.binding.tvAddress.text = customer.address
+            holder.binding.tvGrade.text = customer.grade
+            holder.binding.tvStatus.text = customer.visitStatus
 
-            holder.itemView.tvName.text = arr[position]!!.customerName
-            holder.itemView.tvAddress.text = arr[position]!!.address
-            holder.itemView.tvGrade.text = arr[position]!!.grade
-            holder.itemView.tvStatus.text = arr[position]!!.visitStatus
-
-            println("lattt=="+arr[position]!!.latitude+"<<"+arr[position]!!.longitude)
-
-            if (arr[position]!!.latitude.equals("") && arr[position]!!.longitude.equals("")) {
-//                holder.itemView.txt_loc.setTextColor(Color.parseColor("#D82323"))
-                holder.itemView.cardloc.setBackgroundResource(R.color.bg_loc_red)
-            }else{
-//                holder.itemView.txt_loc.setTextColor(Color.parseColor("#008000"))
-                holder.itemView.cardloc.setBackgroundResource(R.color.bg_loc_green)
+            if (customer.latitude.isNullOrEmpty() && customer.longitude.isNullOrEmpty()) {
+                holder.binding.cardloc.setBackgroundResource(R.color.bg_loc_red)
+            } else {
+                holder.binding.cardloc.setBackgroundResource(R.color.bg_loc_green)
             }
-             val drawableResource = if (arr[position]!!.latitude.equals("") && arr[position]!!.longitude.equals("")) {
-                 R.drawable.ic_location_customer
-             } else {
-                 R.drawable.ic_location_customer2
-             }
 
-             holder.itemView.txt_loc.setCompoundDrawablesWithIntrinsicBounds(drawableResource, 0, 0, 0)
+            val drawableResource =
+                if (customer.latitude.isNullOrEmpty() && customer.longitude.isNullOrEmpty()) {
+                    R.drawable.ic_location_customer
+                } else {
+                    R.drawable.ic_location_customer2
+                }
+            holder.binding.txtLoc.setCompoundDrawablesWithIntrinsicBounds(drawableResource, 0, 0, 0)
 
-
-            if (arr[position]!!.grade != null && arr[position]!!.grade != "") {
-                holder.itemView.cardGrade.visibility = View.VISIBLE
-                if (arr[position]!!.grade == "Grade A") {
-                    holder.itemView.cardGrade.setCardBackgroundColor(Color.parseColor("#FFF4B9"))
-                    holder.itemView.tvGrade.setTextColor(Color.parseColor("#CFA200"))
-                } else if (arr[position]!!.grade == "Grade B") {
-                    holder.itemView.cardGrade.setCardBackgroundColor(Color.parseColor("#E3E3E3"))
-                    holder.itemView.tvGrade.setTextColor(Color.parseColor("#7E7E7E"))
-                } else if (arr[position]!!.grade == "Grade C") {
-                    holder.itemView.cardGrade.setCardBackgroundColor(Color.parseColor("#FFC398"))
-                    holder.itemView.tvGrade.setTextColor(Color.parseColor("#B27244"))
-                } else if (arr[position]!!.grade == "Grade D") {
-                    holder.itemView.cardGrade.setCardBackgroundColor(Color.parseColor("#B8B8B8"))
-                    holder.itemView.tvGrade.setTextColor(Color.parseColor("#494949"))
+            // Grade logic
+            if (!customer.grade.isNullOrEmpty()) {
+                holder.binding.cardGrade.visibility = View.VISIBLE
+                when (customer.grade) {
+                    "Grade A" -> {
+                        holder.binding.cardGrade.setCardBackgroundColor(Color.parseColor("#FFF4B9"))
+                        holder.binding.tvGrade.setTextColor(Color.parseColor("#CFA200"))
+                    }
+                    "Grade B" -> {
+                        holder.binding.cardGrade.setCardBackgroundColor(Color.parseColor("#E3E3E3"))
+                        holder.binding.tvGrade.setTextColor(Color.parseColor("#7E7E7E"))
+                    }
+                    "Grade C" -> {
+                        holder.binding.cardGrade.setCardBackgroundColor(Color.parseColor("#FFC398"))
+                        holder.binding.tvGrade.setTextColor(Color.parseColor("#B27244"))
+                    }
+                    "Grade D" -> {
+                        holder.binding.cardGrade.setCardBackgroundColor(Color.parseColor("#B8B8B8"))
+                        holder.binding.tvGrade.setTextColor(Color.parseColor("#494949"))
+                    }
                 }
             } else {
-                holder.itemView.cardGrade.visibility = View.GONE
+                holder.binding.cardGrade.visibility = View.GONE
             }
 
-            if (arr[position]!!.visitStatus != null && arr[position]!!.visitStatus != "") {
-                holder.itemView.cardStatus.visibility = View.VISIBLE
-                if (arr[position]!!.visitStatus == "Hot") {
-                    holder.itemView.cardStatus.setCardBackgroundColor(Color.parseColor("#FFF2F2"))
-                    holder.itemView.tvStatus.setTextColor(Color.parseColor("#FF0000"))
-                } else if (arr[position]!!.visitStatus == "Cold") {
-                    holder.itemView.cardStatus.setCardBackgroundColor(Color.parseColor("#F2F5FF"))
-                    holder.itemView.tvStatus.setTextColor(Color.parseColor("#0057FF"))
-                } else if (arr[position]!!.visitStatus == "Warm") {
-                    holder.itemView.cardStatus.setCardBackgroundColor(Color.parseColor("#FFFBD6"))
-                    holder.itemView.tvStatus.setTextColor(Color.parseColor("#EAC70F"))
-                } else if (arr[position]!!.visitStatus == "Existing") {
-                    holder.itemView.cardStatus.setCardBackgroundColor(Color.parseColor("#FFFBD6"))
-                    holder.itemView.tvStatus.setTextColor(Color.parseColor("#EAC70F"))
+            // Visit status logic
+            if (!customer.visitStatus.isNullOrEmpty()) {
+                holder.binding.cardStatus.visibility = View.VISIBLE
+                when (customer.visitStatus) {
+                    "Hot" -> {
+                        holder.binding.cardStatus.setCardBackgroundColor(Color.parseColor("#FFF2F2"))
+                        holder.binding.tvStatus.setTextColor(Color.parseColor("#FF0000"))
+                    }
+                    "Cold" -> {
+                        holder.binding.cardStatus.setCardBackgroundColor(Color.parseColor("#F2F5FF"))
+                        holder.binding.tvStatus.setTextColor(Color.parseColor("#0057FF"))
+                    }
+                    "Warm", "Existing" -> {
+                        holder.binding.cardStatus.setCardBackgroundColor(Color.parseColor("#FFFBD6"))
+                        holder.binding.tvStatus.setTextColor(Color.parseColor("#EAC70F"))
+                    }
                 }
             } else {
-                holder.itemView.cardStatus.visibility = View.GONE
+                holder.binding.cardStatus.visibility = View.GONE
             }
 
-            println("visibility="+arr[position]!!.profile_image)
-            Glide.with(mcontext).load(
-               arr[position]!!.profile_image
-            ).into(holder.itemView.img)
+            // Load image
+            Glide.with(mcontext).load(customer.profile_image).into(holder.binding.img)
 
-            holder.itemView.relativeMain.tag = position
-            holder.itemView.relativeMain.setOnClickListener { view ->
-                val pos = view.tag as Int
-
+            // Clicks
+            holder.binding.relativeMain.setOnClickListener {
                 StaticSharedpreference.saveInfo(
                     Constant.CHECKIN_CUST_ID,
-                    arr[pos]!!.customerId.toString(),
+                    customer.customerId.toString(),
                     mcontext
                 )
 
-                val intent = Intent(mcontext, CounterDashboardActivity::class.java)
-                intent.putExtra("image", arr[pos]!!.profile_image.toString())
-                intent.putExtra("customerName", arr[pos]!!.customerName.toString())
-                intent.putExtra("isLead", isLead)
-                intent.putExtra("checkInId", "")
-                intent.putExtra("outstanding", arr[pos]!!.outstanding.toString())
-                intent.putExtra("customerAddress", arr[pos]!!.address.toString())
-                intent.putExtra("isToday", isToday)
-                intent.putExtra("beat_schedule_id", beatScheduleId)
+                val intent = Intent(mcontext, CounterDashboardActivity::class.java).apply {
+                    putExtra("image", customer.profile_image.toString())
+                    putExtra("customerName", customer.customerName.toString())
+                    putExtra("isLead", isLead)
+                    putExtra("checkInId", "")
+                    putExtra("outstanding", customer.outstanding.toString())
+                    putExtra("customerAddress", customer.address.toString())
+                    putExtra("isToday", isToday)
+                    putExtra("beat_schedule_id", beatScheduleId)
+                }
                 mcontext.startActivity(intent)
             }
-            holder.itemView.linearLocation.setTag(position)
-            holder.itemView.linearLocation.setOnClickListener {
-                val pos = it.tag as Int
-                if (!TextUtils.isEmpty(arr[pos]!!.latitude) && !TextUtils.isEmpty(arr[pos]!!.longitude)) {
-                    var lat = arr[pos]!!.latitude
-                    var long = arr[pos]!!.longitude
-                    var label = arr[pos]!!.address
+
+            holder.binding.linearLocation.setOnClickListener {
+                if (!customer.latitude.isNullOrEmpty() && !customer.longitude.isNullOrEmpty()) {
+                    val lat = customer.latitude
+                    val long = customer.longitude
+                    val label = customer.address
                     val intent = Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse(
-                            "geo:<" + lat.toString() + ">,<" + long.toString()
-                                    + ">?q=<" + lat.toString() + ">,<" + long.toString()
-                                    + ">(" + label.toString() + ")"
-                        )
+                        Uri.parse("geo:$lat,$long?q=$lat,$long($label)")
                     )
                     mcontext.startActivity(intent)
                 }
             }
-            holder.itemView.linearCall.setTag(position)
-            holder.itemView.linearCall.setOnClickListener {
-                val pos = it.tag as Int
-                val intent = Intent(Intent.ACTION_DIAL)
-                var mobile = arr[pos]!!.customerMobile
-                intent.data = Uri.parse("tel:" + mobile)
+
+            holder.binding.linearCall.setOnClickListener {
+                val intent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${customer.customerMobile}")
+                }
                 mcontext.startActivity(intent)
             }
-            holder.itemView.linearWhatsApp.setTag(position)
-            holder.itemView.linearWhatsApp.setOnClickListener {
-                val pos = it.tag as Int
-                openWhatsApp(arr[pos]!!.customerMobile!!, mcontext)
+
+            holder.binding.linearWhatsApp.setOnClickListener {
+                openWhatsApp(customer.customerMobile ?: "", mcontext)
             }
-            holder.itemView.linearMail.setTag(position)
-            holder.itemView.linearMail.setOnClickListener {
-                val pos = it.tag as Int
-                if (!TextUtils.isEmpty(arr[pos]!!.email)) {
-                    val to = arr[pos]!!.email
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(to!!))
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "")
-                    intent.putExtra(Intent.EXTRA_TEXT, "")
 
-//need this to prompts email client only
-
-//need this to prompts email client only
-                    intent.type = "message/rfc822"
-
+            holder.binding.linearMail.setOnClickListener {
+                if (!customer.email.isNullOrEmpty()) {
+                    val to = customer.email
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:")
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
+                        putExtra(Intent.EXTRA_SUBJECT, "")
+                        putExtra(Intent.EXTRA_TEXT, "")
+                    }
                     mcontext.startActivity(Intent.createChooser(intent, "Choose an Email client :"))
                 }
             }
-
         }
     }
 

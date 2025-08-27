@@ -20,21 +20,25 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.exp.clonefieldkonnect.R
-import kotlinx.android.synthetic.main.activity_camera_custom.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.exp.clonefieldkonnect.databinding.ActivityCameraCustomBinding
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 class CameraCustomActivity   : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var binding: ActivityCameraCustomBinding
+
     var camera = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera_custom)
+        binding = ActivityCameraCustomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        setContentView(R.layout.activity_camera_custom)
 
         // hide the action bar
         supportActionBar?.hide()
@@ -112,7 +116,7 @@ class CameraCustomActivity   : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewFinder.createSurfaceProvider())
+                    it.setSurfaceProvider(binding.viewFinder.createSurfaceProvider())
                 }
 
             imageCapture = ImageCapture.Builder().build()

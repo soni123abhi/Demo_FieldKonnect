@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import com.exp.import.Utilities
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
@@ -20,6 +19,7 @@ import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.services.MyJobScheduler
+import com.exp.import.Utilities
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.JsonObject
 import org.json.JSONObject
@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                      println("uniqueIddd=="+uniqueIddd)
 
                      val packageInfo = packageManager.getPackageInfo(packageName, 0)
-                     val currentVersion = packageInfo.versionName
+                     val currentVersion = packageInfo.versionName ?: ""
                      login(deviceName,currentVersion,uniqueIddd)
                  }
             }

@@ -8,13 +8,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -28,10 +37,8 @@ import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.DealerMonthlySalesReport
 import com.exp.clonefieldkonnect.model.DealerSalesReportModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_dealer_c_yvs_l_y_sales.*
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.HashMap
 
 
 class DealerCYvsLYSalesFragment(
@@ -46,6 +53,7 @@ class DealerCYvsLYSalesFragment(
     lateinit var cardBack_dealer_sales: CardView
     lateinit var tvTitle_dealer_sales: TextView
     lateinit var linearTop_dealer_sales: CardView
+    lateinit var fragment_container_dealer_sales: FrameLayout
     lateinit var rel_main_dealer_sales: RelativeLayout
     lateinit var recyclerView_dealer_sale: RecyclerView
     lateinit var edtSearch: AutoCompleteTextView
@@ -93,6 +101,7 @@ class DealerCYvsLYSalesFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardBack_dealer_sales = rootView.findViewById(R.id.cardBack_dealer_sales)
+        fragment_container_dealer_sales = rootView.findViewById(R.id.fragment_container_dealer_sales)
         tvTitle_dealer_sales = rootView.findViewById(R.id.tvTitle_dealer_sales)
         linearTop_dealer_sales = rootView.findViewById(R.id.linearTop_dealer_sales)
         rel_main_dealer_sales = rootView.findViewById(R.id.rel_main_dealer_sales)

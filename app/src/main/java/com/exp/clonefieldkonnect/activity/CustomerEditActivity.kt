@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,9 +22,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.exp.import.Utilities
+import com.bumptech.glide.Glide
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.adapter.EnquiryInfoAdapter
 import com.exp.clonefieldkonnect.connection.APIResultLitener
@@ -33,7 +35,7 @@ import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.GPSTracker
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.*
-import com.bumptech.glide.Glide
+import com.exp.import.Utilities
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -44,6 +46,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.default
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
@@ -51,8 +55,6 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class CustomerEditActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -534,209 +536,188 @@ class CustomerEditActivity : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == INTENTCAMERA) {
+        if (requestCode == INTENTCAMERA && resultCode == Activity.RESULT_OK) {
+            val path = cameraFile
+            imageFile = path.path
 
-            if (resultCode == Activity.RESULT_OK) {
-                val path = cameraFile
-
-                //  compressImage(path)
-
-                //  var bitmap = getBitmap(path.path)
-
-                //imageFile = Compressor(this@MyProfileActivity).compressToFile(path)
-                imageFile = path.path
-
-                var compressedImageBitmap: Bitmap? = null
+            lifecycleScope.launch {
                 try {
-                    compressedImageBitmap =
-                        Compressor(this@CustomerEditActivity).setMaxHeight(100).setMaxWidth(100)
-                            .setQuality(50).compressToBitmap(path)
+                    val compressedFile = Compressor.compress(this@CustomerEditActivity, path) {
+                        default(
+                            width = 100,
+                            height = 100,
+                            format = Bitmap.CompressFormat.JPEG,
+                            quality = 50
+                        )
+                    }
+
+                    val compressedImageBitmap =
+                        BitmapFactory.decodeFile(compressedFile.absolutePath)
+
+                    compressedImageBitmap?.let { bitmap ->
+                        val byteArrayOutputStream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+                        val byteArray = byteArrayOutputStream.toByteArray()
+                        base64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+                        when (selectedImg) {
+                            "outlet" -> {
+                                Glide.with(this@CustomerEditActivity).load(path.path).into(imgProfile)
+                                outletImg = base64
+                            }
+                            "gst" -> {
+                                Glide.with(this@CustomerEditActivity).load(path.path).into(imgGST)
+                                gstImg = base64
+                            }
+                            "adhar" -> {
+                                Glide.with(this@CustomerEditActivity).load(path.path).into(imgAdhar)
+                                adharImg = base64
+                            }
+                            "pan" -> {
+                                Glide.with(this@CustomerEditActivity).load(path.path).into(imgPAN)
+                                panImg = base64
+                            }
+                            "other" -> {
+                                Glide.with(this@CustomerEditActivity).load(path.path).into(imgOther)
+                                otherImg = base64
+                            }
+                        }
+                    }
+
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                compressedImageBitmap!!.compress(
-                    Bitmap.CompressFormat.PNG,
-                    50,
-                    byteArrayOutputStream
-                )
-
-                val byteArray = byteArrayOutputStream.toByteArray()
-
-
-                base64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
-
-                if (selectedImg == "outlet") {
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgProfile)
-                    outletImg = base64
-                } else if (selectedImg == "gst") {
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgGST)
-                    gstImg = base64
-                } else if (selectedImg == "adhar") {
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgAdhar)
-                    adharImg = base64
-                } else if (selectedImg == "pan") {
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgPAN)
-                    panImg = base64
-                } else if (selectedImg == "other") {
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgOther)
-                    otherImg = base64
-                }
-
-
             }
-        } else if (requestCode == INTENTGALLERY) {
 
-            if (resultCode == Activity.RESULT_OK) {
+        }
+        else if (requestCode == INTENTGALLERY && resultCode == Activity.RESULT_OK) {
+            val selectedImageUri: Uri = data?.data ?: return
+            val tempPath = Utilities.getPathFromUri(selectedImageUri, this@CustomerEditActivity)
+            val file = File(tempPath)
 
-                val selectedImageUri: Uri = data!!.data!!
-
-                val tempPath = Utilities.getPathFromUri(selectedImageUri, this@CustomerEditActivity)
-
-                val file = File(tempPath)
-
-                var compressedImageBitmap: Bitmap? = null
+            lifecycleScope.launch {
                 try {
-                    compressedImageBitmap =
-                        Compressor(this@CustomerEditActivity).setMaxHeight(100).setMaxWidth(100)
-                            .setQuality(50).compressToBitmap(file)
+                    val compressedFile = Compressor.compress(this@CustomerEditActivity, file) {
+                        default(width = 100, height = 100, format = Bitmap.CompressFormat.JPEG, quality = 50)
+                    }
+
+                    val compressedImageBitmap =
+                        BitmapFactory.decodeFile(compressedFile.absolutePath)
+
+                    compressedImageBitmap?.let { bitmap ->
+                        val byteArrayOutputStream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+                        val byteArray = byteArrayOutputStream.toByteArray()
+                        base64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+                        when (selectedImg) {
+                            "outlet" -> {
+                                Glide.with(this@CustomerEditActivity).load(data.data).into(imgProfile)
+                                outletImg = base64
+                            }
+                            "gst" -> {
+                                Glide.with(this@CustomerEditActivity).load(data.data).into(imgGST)
+                                gstImg = base64
+                            }
+                            "adhar" -> {
+                                Glide.with(this@CustomerEditActivity).load(data.data).into(imgAdhar)
+                                adharImg = base64
+                            }
+                            "pan" -> {
+                                Glide.with(this@CustomerEditActivity).load(data.data).into(imgPAN)
+                                panImg = base64
+                            }
+                            "other" -> {
+                                Glide.with(this@CustomerEditActivity).load(data.data).into(imgOther)
+                                otherImg = base64
+                            }
+                        }
+                    }
+
+                    imageFile = tempPath
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                compressedImageBitmap!!.compress(
-                    Bitmap.CompressFormat.PNG,
-                    50,
-                    byteArrayOutputStream
-                )
-
-                val byteArray = byteArrayOutputStream.toByteArray()
-
-                base64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
-
-                if (selectedImg == "outlet") {
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgProfile)
-                    outletImg = base64
-                } else if (selectedImg == "gst") {
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgGST)
-                    gstImg = base64
-                } else if (selectedImg == "adhar") {
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgAdhar)
-                    adharImg = base64
-                } else if (selectedImg == "pan") {
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgPAN)
-                    panImg = base64
-                } else if (selectedImg == "other") {
-                    Glide.with(this)
-                        .load(data.data)
-                        .into(imgOther)
-                    otherImg = base64
-                }
-
-                imageFile = tempPath
-
-
             }
-        } else if (requestCode == REQUEST_CHECK_SETTINGS) {
-            if (resultCode == Activity.RESULT_OK) {
-                gettingLocation()
-            }
+        }
+        else if (requestCode == REQUEST_CHECK_SETTINGS && resultCode == Activity.RESULT_OK) {
+            gettingLocation()
         }
     }
 
 
-/*
-    private fun storeCustomer() {
+    /*
+        private fun storeCustomer() {
 
-        if (!Utilities.isOnline(this@CustomerEditActivity)) {
-            return
-        }
+            if (!Utilities.isOnline(this@CustomerEditActivity)) {
+                return
+            }
 
-        var dialog = DialogClass.progressDialog(this@CustomerEditActivity)
+            var dialog = DialogClass.progressDialog(this@CustomerEditActivity)
 
-        var storeCustomerRequestModel = StoreCustomerRequestModel()
+            var storeCustomerRequestModel = StoreCustomerRequestModel()
 
-        storeCustomerRequestModel.name = edtFirmName.text.toString()
-        storeCustomerRequestModel.full_name = edtFName.text.toString()
-      //  storeCustomerRequestModel.first_name = edtFName.text.toString()
-      //  storeCustomerRequestModel.last_name = edtFName.text.toString()
-        storeCustomerRequestModel.mobile = edtMobile.text.toString()
-        storeCustomerRequestModel.email = edtEmail.text.toString()
-        storeCustomerRequestModel.address1 = edtAddress1.text.toString()
-        storeCustomerRequestModel.latitude = latitude
-        storeCustomerRequestModel.longitude = longitude
-      //  storeCustomerRequestModel.beat_id = beatPos
-        storeCustomerRequestModel.gstin_no = edtGSTIN.text.toString()
-        storeCustomerRequestModel.pan_no = edtPAN.text.toString()
-        storeCustomerRequestModel.aadhar_no = edtAdhar.text.toString()
-        storeCustomerRequestModel.otherid_no = edtOther.text.toString()
-        storeCustomerRequestModel.gstin_image = gstImg
-        storeCustomerRequestModel.pan_image = panImg
-        storeCustomerRequestModel.aadhar_image = adharImg
-        storeCustomerRequestModel.other_image = otherImg
-        storeCustomerRequestModel.zipcode = spinnerPin.text.toString()
-        storeCustomerRequestModel.image = outletImg
+            storeCustomerRequestModel.name = edtFirmName.text.toString()
+            storeCustomerRequestModel.full_name = edtFName.text.toString()
+          //  storeCustomerRequestModel.first_name = edtFName.text.toString()
+          //  storeCustomerRequestModel.last_name = edtFName.text.toString()
+            storeCustomerRequestModel.mobile = edtMobile.text.toString()
+            storeCustomerRequestModel.email = edtEmail.text.toString()
+            storeCustomerRequestModel.address1 = edtAddress1.text.toString()
+            storeCustomerRequestModel.latitude = latitude
+            storeCustomerRequestModel.longitude = longitude
+          //  storeCustomerRequestModel.beat_id = beatPos
+            storeCustomerRequestModel.gstin_no = edtGSTIN.text.toString()
+            storeCustomerRequestModel.pan_no = edtPAN.text.toString()
+            storeCustomerRequestModel.aadhar_no = edtAdhar.text.toString()
+            storeCustomerRequestModel.otherid_no = edtOther.text.toString()
+            storeCustomerRequestModel.gstin_image = gstImg
+            storeCustomerRequestModel.pan_image = panImg
+            storeCustomerRequestModel.aadhar_image = adharImg
+            storeCustomerRequestModel.other_image = otherImg
+            storeCustomerRequestModel.zipcode = spinnerPin.text.toString()
+            storeCustomerRequestModel.image = outletImg
 
-        storeCustomerRequestModel.bank_passbook = passbookImg
-        storeCustomerRequestModel.landmark = edtMarket.text.toString()
-        storeCustomerRequestModel.customer_id = StaticSharedpreference.getInfo(Constant.CHECKIN_CUST_ID, this).toString()
-        storeCustomerRequestModel.address_id = addressId
+            storeCustomerRequestModel.bank_passbook = passbookImg
+            storeCustomerRequestModel.landmark = edtMarket.text.toString()
+            storeCustomerRequestModel.customer_id = StaticSharedpreference.getInfo(Constant.CHECKIN_CUST_ID, this).toString()
+            storeCustomerRequestModel.address_id = addressId
 
 
-        ApiClient.updateCustomerProfile(
-            StaticSharedpreference.getInfo(
-                Constant.ACCESS_TOKEN,
-                this@CustomerEditActivity
-            ).toString(), storeCustomerRequestModel, object : APIResultLitener<JsonObject> {
-                override fun onAPIResult(
-                    response: Response<JsonObject>?,
-                    errorMessage: String?
-                ) {
-                    dialog.dismiss()
-                    if (response != null && errorMessage == null) {
+            ApiClient.updateCustomerProfile(
+                StaticSharedpreference.getInfo(
+                    Constant.ACCESS_TOKEN,
+                    this@CustomerEditActivity
+                ).toString(), storeCustomerRequestModel, object : APIResultLitener<JsonObject> {
+                    override fun onAPIResult(
+                        response: Response<JsonObject>?,
+                        errorMessage: String?
+                    ) {
+                        dialog.dismiss()
+                        if (response != null && errorMessage == null) {
 
-                        if (response.code() == 200) {
+                            if (response.code() == 200) {
 
+                                Toast.makeText(
+                                    this@CustomerEditActivity,
+                                    "Customer updated successfully",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                finish()
+
+                            }
+                        } else {
                             Toast.makeText(
                                 this@CustomerEditActivity,
-                                "Customer updated successfully",
+                                resources.getString(R.string.poor_connection),
                                 Toast.LENGTH_LONG
                             ).show()
-                            finish()
-
                         }
-                    } else {
-                        Toast.makeText(
-                            this@CustomerEditActivity,
-                            resources.getString(R.string.poor_connection),
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
                 }
-            }
-        )
-    }
-*/
+            )
+        }
+    */
 
     var addressId= ""
 

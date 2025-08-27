@@ -524,7 +524,7 @@ class PaymentReceivedFragment : Fragment(), View.OnClickListener {
 
             var file: File? = File(imageFile)
             try {
-                file = Compressor(activityLocal).compressToFile(file)
+//                file = Compressor(activityLocal).compressToFile(file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }

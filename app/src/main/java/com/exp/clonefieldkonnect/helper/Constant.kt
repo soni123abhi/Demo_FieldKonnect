@@ -9,6 +9,7 @@ object Constant {
     val TabPosition= "tab_postion"
 
     val EMAIL= "email"
+    val NOTIFICATION_TYPE= "notification_type"
     val MOBILE= "mobile"
     val PAYROLL_ID= "payroll_id"
     val FIRM_NAME= "firmName"

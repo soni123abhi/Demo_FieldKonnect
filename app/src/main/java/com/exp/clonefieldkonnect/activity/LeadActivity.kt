@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.PhoneStateListener
+import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -42,6 +44,7 @@ import com.google.gson.JsonObject
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter.OnEmailClick,
@@ -96,6 +99,7 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
     var start_date : String = ""
     var end_date : String = ""
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lead)
@@ -115,6 +119,7 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         notification_count = findViewById(R.id.notification_count)
 
         lead_checkin_lead_id = StaticSharedpreference.getInfo(Constant.Lead_check_in_leadID, this@LeadActivity).toString()
+
 
         println("Lead_check_in"+lead_checkin_lead_id)
 
@@ -569,7 +574,6 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         recyclerView_lead_status.scrollToPosition(lastPosition)
         useractivityAdapter.notifyDataSetChanged()
     }
-
 
 
     override fun onClick(v: View?) {

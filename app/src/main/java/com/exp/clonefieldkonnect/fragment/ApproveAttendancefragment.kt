@@ -9,14 +9,25 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RadioGroup
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devstune.searchablemultiselectspinner.SearchableItem
@@ -35,13 +46,10 @@ import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
 import com.exp.clonefieldkonnect.model.UserAttendanceListModel
 import com.exp.import.Utilities
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_approve_attendancefragment.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import java.util.Locale
 
 class ApproveAttendancefragment(
     var cardBack: CardView,
@@ -66,6 +74,7 @@ class ApproveAttendancefragment(
     lateinit var tvTitle_atten: TextView
     lateinit var cardSearch: RelativeLayout
     lateinit var rec_attendance_main: RelativeLayout
+    lateinit var fragment_container_atten: FrameLayout
     lateinit var cardbtn_submit: CardView
 
     lateinit var radioGroup : RadioGroup
@@ -117,6 +126,7 @@ class ApproveAttendancefragment(
         linearTopreport.visibility = View.GONE
         cardBack_report_atten = rootView.findViewById(R.id.cardBack_report_atten)
         linearTop_report_atten = rootView.findViewById(R.id.linearTop_report_atten)
+        fragment_container_atten = rootView.findViewById(R.id.fragment_container_atten)
         fab= rootView.findViewById(R.id.fab_add)
 
         recyclerView_attendance = rootView.findViewById(R.id.recyclerView_attendance)

@@ -9,11 +9,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -28,10 +36,8 @@ import com.exp.clonefieldkonnect.model.PrimaryFilterListModel
 import com.exp.clonefieldkonnect.model.PrimarySchemeModel
 import com.exp.clonefieldkonnect.model.PrimarySchemeTableModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_primary_scheme.*
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.HashMap
 
 
 class PrimarySchemeFragment(
@@ -43,6 +49,7 @@ class PrimarySchemeFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     lateinit var linearTop_primary_report: CardView
+    lateinit var fragment_container_primary_report: FrameLayout
     lateinit var cardBack_primary_report: CardView
     lateinit var cardshowww: CardView
     lateinit var textview3: TextView
@@ -100,6 +107,7 @@ class PrimarySchemeFragment(
 
     private fun initViews() {
         linearTopreport.visibility = View.GONE
+        fragment_container_primary_report = rootView.findViewById(R.id.fragment_container_primary_report)
         cardBack_primary_report = rootView.findViewById(R.id.cardBack_primary_report)
         tvTitle_primary_report = rootView.findViewById(R.id.tvTitle_primary_report)
         rel_main_primary_report = rootView.findViewById(R.id.rel_main_primary_report)

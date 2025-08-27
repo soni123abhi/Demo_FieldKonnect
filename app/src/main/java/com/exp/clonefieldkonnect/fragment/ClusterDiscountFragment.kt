@@ -7,13 +7,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -21,16 +30,16 @@ import com.exp.clonefieldkonnect.activity.MainActivity
 import com.exp.clonefieldkonnect.adapter.ClusterOrderListAdapter
 import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
-import com.exp.clonefieldkonnect.helper.*
+import com.exp.clonefieldkonnect.helper.Constant
+import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.RecyclerViewLoadMoreScroll
+import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.ClusterOrderListModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_cluster_discount.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import java.util.Locale
 
 
 class ClusterDiscountFragment(
@@ -42,6 +51,7 @@ class ClusterDiscountFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     private lateinit var rel_main_cluster: RelativeLayout
+    private lateinit var fragment_container_cluster: FrameLayout
     private lateinit var recyclerView_cluster: RecyclerView
     private lateinit var cardBack_cluster: CardView
     private lateinit var tvTitle_cluster: TextView
@@ -94,6 +104,7 @@ class ClusterDiscountFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         rel_main_cluster = rootView.findViewById(R.id.rel_main_cluster)
+        fragment_container_cluster = rootView.findViewById(R.id.fragment_container_cluster)
         recyclerView_cluster = rootView.findViewById(R.id.recyclerView_cluster)
         tvTitle_cluster = rootView.findViewById(R.id.tvTitle_cluster)
         cardBack_cluster = rootView.findViewById(R.id.cardBack_cluster)

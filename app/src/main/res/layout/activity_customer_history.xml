@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/bg_colour_two">
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark">
 
 
     <androidx.cardview.widget.CardView
@@ -59,7 +60,8 @@
     <RelativeLayout
         android:id="@+id/rec_user_main2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/bg_colour_two"
         android:layout_below="@+id/linearTop_activity"
         android:visibility="visible">
 

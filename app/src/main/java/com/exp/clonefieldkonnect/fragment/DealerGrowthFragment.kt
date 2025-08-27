@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,14 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -33,10 +34,8 @@ import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.DealergrowthModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_dealer_growth.fragment_container_dealer_growth
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.HashMap
 
 
 class DealerGrowthFragment(
@@ -51,6 +50,7 @@ class DealerGrowthFragment(
     lateinit var tvTitle_dealer_growth: TextView
     lateinit var rel_main_dealer_growth: RelativeLayout
     lateinit var linearTop_dealer_growth: CardView
+    lateinit var fragment_container_dealer_growth: FrameLayout
     lateinit var recyclerView_dealer_growth: RecyclerView
     lateinit var edtSearchdivision: AutoCompleteTextView
     lateinit var edtSearchbranch: AutoCompleteTextView
@@ -103,6 +103,7 @@ class DealerGrowthFragment(
 
     private fun initViews() {
         linearTopreport.visibility = View.GONE
+        fragment_container_dealer_growth = rootView.findViewById(R.id.fragment_container_dealer_growth)
         cardBack_dealer_growth = rootView.findViewById(R.id.cardBack_dealer_growth)
         tvTitle_dealer_growth = rootView.findViewById(R.id.tvTitle_dealer_growth)
         rel_main_dealer_growth = rootView.findViewById(R.id.rel_main_dealer_growth)

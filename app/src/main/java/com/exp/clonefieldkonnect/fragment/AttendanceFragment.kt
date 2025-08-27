@@ -49,7 +49,6 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.dialog_checkin_summary.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -318,11 +317,12 @@ class AttendanceFragment : Fragment(), View.OnClickListener {
         var edtCheckIn: EditText = mDialogView.findViewById(com.exp.clonefieldkonnect.R.id.edtCheckIn)
         var tvDetails: TextView = mDialogView.findViewById(com.exp.clonefieldkonnect.R.id.tvDetails)
         var tvBtn: TextView = mDialogView.findViewById(com.exp.clonefieldkonnect.R.id.tvBtn)
+        var cardOK: CardView = mDialogView.findViewById(com.exp.clonefieldkonnect.R.id.cardOK)
 
         tvDetails.text = "$tv Summary"
         tvBtn.text = "$tv"
 
-        mDialogView.cardOK.setOnClickListener {
+        cardOK.setOnClickListener {
             //dismiss dialog
             mAlertDialog.dismiss()
             if (edtCheckIn.text.toString() != "") {

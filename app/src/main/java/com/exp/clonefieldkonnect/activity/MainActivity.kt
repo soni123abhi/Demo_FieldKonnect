@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     var comb_off_ball = ""
     var working_type_send= ""
     var punchin_flag_send = ""
+    var notification_module = ""
 
     //    lateinit var relativeNotification: LinearLayout
     lateinit var nav_view: NavigationView
@@ -132,12 +133,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
         customerVisitFlag = intent.getStringExtra("CustomerVisit") ?: "default_value"
         customer_id = intent.getStringExtra("customerId") ?: ""
 
+//        println("Received module in onNewIntentoncreateeee:"+ intent.getStringExtra("module"))
+
+        notification_module = StaticSharedpreference.getInfo(Constant.NOTIFICATION_TYPE,this@MainActivity).toString()
+        println("Received module in onNewIntentoncreateeee:"+notification_module)
+
+        if (notification_module.isNotEmpty()){
+            if (notification_module.equals("opportunity")){
+                StaticSharedpreference.saveInfo(Constant.NOTIFICATION_TYPE,"",this@MainActivity)
+                startActivity(Intent(this@MainActivity,OpportunityViewActivity::class.java))
+            }else if (notification_module.equals("lead")){
+                StaticSharedpreference.saveInfo(Constant.NOTIFICATION_TYPE,"",this@MainActivity)
+                startActivity(Intent(this@MainActivity,LeadActivity::class.java))
+            }else if (notification_module.equals("task")){
+                StaticSharedpreference.saveInfo(Constant.NOTIFICATION_TYPE,"",this@MainActivity)
+
+                var intent = Intent(this, TaskActivity::class.java)
+                intent.putExtra("notification_tag",notification_module)
+                startActivity(intent)
+
+            }else if (notification_module.equals("task_management")){
+                StaticSharedpreference.saveInfo(Constant.NOTIFICATION_TYPE,"",this@MainActivity)
+
+                var intent = Intent(this, TaskActivity::class.java)
+                intent.putExtra("notification_tag",notification_module)
+                startActivity(intent)
+
+            }
+        }
+
+
+
         println("customerVisitFlag=="+customerVisitFlag+"<<"+ tabPosition)
+
+
 
         if (customerVisitFlag == "CustomerVisit"){
             println("customerVisitFlag=1="+customerVisitFlag+"<<"+ tabPosition)
@@ -166,11 +201,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             tvPunch.visibility = View.GONE
             cardleave.visibility = View.GONE
 
-//            imgCBeat.visibility = View.VISIBLE
-//            tvBeat.setTextColor(Color.parseColor("#00aadb"))
-//            imgBeat.setImageDrawable(resources.getDrawable(R.drawable.ic_beat_new))
-//            imgBeat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
-//            tabPosition = 2
         }else if(customerVisitFlag == "Expense"){
             println("customerVisitFlag=3="+customerVisitFlag+"<<"+ tabPosition)
             if (tabPosition != 2)
@@ -182,11 +212,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             tvPunch.visibility = View.GONE
             cardleave.visibility = View.GONE
 
-//            imgCBeat.visibility = View.VISIBLE
-//            tvBeat.setTextColor(Color.parseColor("#00aadb"))
-//            imgBeat.setImageDrawable(resources.getDrawable(R.drawable.ic_beat_new))
-//            imgBeat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
-//            tabPosition = 2
         }else if(customerVisitFlag == "MSP Activity"){
             println("customerVisitFlag=4="+customerVisitFlag+"<<"+ tabPosition)
             if (tabPosition != 2)
@@ -198,11 +223,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             tvPunch.visibility = View.GONE
             cardleave.visibility = View.GONE
 
-//            imgCBeat.visibility = View.VISIBLE
-//            tvBeat.setTextColor(Color.parseColor("#00aadb"))
-//            imgBeat.setImageDrawable(resources.getDrawable(R.drawable.ic_beat_new))
-//            imgBeat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
-//            tabPosition = 2
         }else if (customerVisitFlag == "customer_order_his"){
             println("customerVisitFlag=5="+customerVisitFlag+"<<"+ tabPosition)
 //            linearTop.visibility = View.VISIBLE
@@ -222,8 +242,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             imgState.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
             tabPosition = 3
         }
-       // setUpWorker()
     }
+
 
     private fun getLocation() {
         if (checkPermissions()) {
@@ -271,8 +291,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     private fun requestPermissions() {
         val permissions = mutableListOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_PHONE_NUMBERS,
+            Manifest.permission.CALL_PHONE
+            )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             permissions.add(Manifest.permission.POST_NOTIFICATIONS)
@@ -541,24 +565,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             R.id.relativeHome -> {
-                println("Abhiiii=hhh="+customerVisitFlag+"<<"+ tabPosition)
-                linearTop.visibility = View.VISIBLE
-                three_dot.visibility = View.VISIBLE
-                var dashBoardNewFragment = DashBoardNewDesingFragment()
-                dashBoardNewFragment.punchInDetails(this)
-                if (tabPosition != 0) {
-                    goToFragment(dashBoardNewFragment, true)
-                    cardBurger.visibility = View.VISIBLE
-                    cardBack.visibility = View.GONE
-                    println("AKAKKAKAKA==$44")
-                    cardPunch.visibility = View.VISIBLE
-                    cardleave.visibility = View.VISIBLE
-                    allInActive()
-                    imgCHome.visibility = View.VISIBLE
-                    tvHome.setTextColor(Color.parseColor("#00aadb"))
-                    imgHome.setImageDrawable(resources.getDrawable(R.drawable.ic_home_new))
-                    imgHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
-                    tabPosition = 0
+                if (customerVisitFlag.equals("default_value")){
+                    linearTop.visibility = View.VISIBLE
+                    three_dot.visibility = View.VISIBLE
+                    var dashBoardNewFragment = DashBoardNewDesingFragment()
+                    dashBoardNewFragment.punchInDetails(this)
+                    if (tabPosition != 0) {
+                        goToFragment(dashBoardNewFragment, true)
+                        cardBurger.visibility = View.VISIBLE
+                        cardBack.visibility = View.GONE
+                        println("AKAKKAKAKA==$44")
+                        cardPunch.visibility = View.VISIBLE
+                        cardleave.visibility = View.VISIBLE
+                        allInActive()
+                        imgCHome.visibility = View.VISIBLE
+                        tvHome.setTextColor(Color.parseColor("#00aadb"))
+                        imgHome.setImageDrawable(resources.getDrawable(R.drawable.ic_home_new))
+                        imgHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
+                        tabPosition = 0
+                    }
+                }else{
+                    startActivity(Intent(this@MainActivity,MainActivity::class.java))
                 }
             }
             R.id.cardBack -> {
@@ -667,6 +694,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             R.id.relativeReport -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 customerVisitFlag = "default_value"
+                tabPosition = 2
                 goToFragment(ReportFragment(linearTop, tabPosition,customerVisitFlag), false)
                 allInActive()
                 cardBurger.visibility = View.GONE
@@ -1346,6 +1374,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                 }
             })
     }
+
+
 
 
 

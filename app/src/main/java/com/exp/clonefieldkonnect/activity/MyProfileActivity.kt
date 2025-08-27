@@ -17,17 +17,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import com.exp.import.Utilities
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
-import com.bumptech.glide.Glide
+import com.exp.import.Utilities
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -125,27 +127,30 @@ class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
         var dialog = DialogClass.progressDialog(this@MyProfileActivity)
 
 
-        var fileToUploadList: MultipartBody.Part?
+        lateinit var fileToUploadList: MultipartBody.Part
 
 
-        if (imageFile.equals("")) {
-            val reqbodyFile = RequestBody.create(MediaType.parse("text"), "")
+        if (imageFile.isNullOrEmpty()) {
+            val reqbodyFile = RequestBody.create(MediaType.parse("text/plain"), "")
             fileToUploadList = MultipartBody.Part.createFormData("image", "")
         } else {
+            val file = File(imageFile)
 
-            var file: File? = File(imageFile)
-            try {
-                file = Compressor(this).compressToFile(file)
-            } catch (e: IOException) {
-                e.printStackTrace()
+            // launch coroutine
+            lifecycleScope.launch {
+                try {
+                    val compressedFile = Compressor.compress(this@MyProfileActivity, file)
+
+                    val reqbodyFileD: RequestBody =
+                        RequestBody.create(MediaType.parse("image/*"), compressedFile)
+                    val fileName = "image"
+                    fileToUploadList = MultipartBody.Part.createFormData(fileName, compressedFile.name, reqbodyFileD)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
-
-            val reqbodyFileD: RequestBody =
-                RequestBody.create(MediaType.parse("image/*"), file)
-            val fileName = "image"
-            fileToUploadList =
-                MultipartBody.Part.createFormData(fileName, file!!.name, reqbodyFileD)
         }
+
 
         ApiClient.updateProfile(
             StaticSharedpreference.getInfo(Constant.ACCESS_TOKEN, this).toString(),

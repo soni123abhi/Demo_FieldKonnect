@@ -31,7 +31,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.HashMap
 
 
 class ReportFragment(var linearTop: CardView, var tabPosition: Int,var customerVisitFlag : String) : Fragment(),ReportAdapter.OnEmailClick {
@@ -101,6 +100,8 @@ class ReportFragment(var linearTop: CardView, var tabPosition: Int,var customerV
         }
 
         println("customerVisitFlagcustomerVisitFlag=="+customerVisitFlag)
+
+
 
         if (customerVisitFlag == "Tour Plan"){
             tvTitle.text = "Tour Plan"

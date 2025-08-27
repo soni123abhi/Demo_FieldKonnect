@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +18,14 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -40,10 +41,8 @@ import com.exp.clonefieldkonnect.model.Dataaaaa
 import com.exp.clonefieldkonnect.model.MSPFilterDataModel
 import com.exp.clonefieldkonnect.model.MspTabledataModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_m_s_p_report.fragment_container_msp_report
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.HashMap
 
 
 class MSPReportFragment(
@@ -55,6 +54,7 @@ class MSPReportFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     lateinit var linearTop_msp_report: CardView
+    lateinit var fragment_container_msp_report: FrameLayout
     lateinit var cardBack_msp_report: CardView
     lateinit var cardshowww: CardView
     lateinit var tvTitle_msp_report: TextView
@@ -104,6 +104,7 @@ class MSPReportFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         linearTop_msp_report = rootView.findViewById(R.id.linearTop_msp_report)
+        fragment_container_msp_report = rootView.findViewById(R.id.fragment_container_msp_report)
         cardBack_msp_report = rootView.findViewById(R.id.cardBack_msp_report)
         tvTitle_msp_report = rootView.findViewById(R.id.tvTitle_msp_report)
         rel_main_msp_report = rootView.findViewById(R.id.rel_main_msp_report)

@@ -7,12 +7,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -25,14 +34,10 @@ import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.SpecialDiscountModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_cluster_discount.*
-import kotlinx.android.synthetic.main.fragment_special_discount.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import java.util.Locale
 
 
 class SpecialDiscountFragment(
@@ -46,6 +51,7 @@ class SpecialDiscountFragment(
     private lateinit var cardBack_special: CardView
     private lateinit var tvTitle_special: TextView
     private lateinit var rel_main_special: RelativeLayout
+    private lateinit var fragment_container_special: FrameLayout
     private lateinit var recyclerView_special: RecyclerView
     private lateinit var edtSearch: AutoCompleteTextView
     private lateinit var edtSearchstatus: AutoCompleteTextView
@@ -98,6 +104,7 @@ class SpecialDiscountFragment(
         recyclerView_special = rootView.findViewById(R.id.recyclerView_special)
         edtSearch = rootView.findViewById(R.id.edtSearch)
         edtSearchstatus = rootView.findViewById(R.id.edtSearchstatus)
+        fragment_container_special = rootView.findViewById(R.id.fragment_container_special)
 
         cardFrom_special = rootView.findViewById(R.id.cardFrom_special)
         cardTo_special = rootView.findViewById(R.id.cardTo_special)

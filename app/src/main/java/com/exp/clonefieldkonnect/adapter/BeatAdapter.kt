@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.activity.BeatCustomerActivity
+import com.exp.clonefieldkonnect.databinding.AdapterBeatBinding
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.model.BeatModel
-import kotlinx.android.synthetic.main.adapter_beat.view.*
 
 class BeatAdapter(val arr : java.util.ArrayList<BeatModel?>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -21,7 +21,10 @@ class BeatAdapter(val arr : java.util.ArrayList<BeatModel?>) :
     lateinit var mcontext: Context
 
     class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+//    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    class ItemViewHolder(val binding: AdapterBeatBinding) : RecyclerView.ViewHolder(binding.root)
+
 
     fun addData(dataViews: List<BeatModel>) {
         this.arr.addAll(dataViews)
@@ -49,8 +52,8 @@ class BeatAdapter(val arr : java.util.ArrayList<BeatModel?>) :
 
 
         return if (viewType == Constant.VIEW_TYPE_ITEM) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_beat, parent, false)
-            ItemViewHolder(view)
+            val binding = AdapterBeatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemViewHolder(binding)
         } else {
             val view = LayoutInflater.from(mcontext).inflate(R.layout.progress_loading, parent, false)
             LoadingViewHolder(view)
@@ -58,40 +61,34 @@ class BeatAdapter(val arr : java.util.ArrayList<BeatModel?>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemViewHolder) {
+            val beat = arr[position]!!
 
-        if (holder.itemViewType == Constant.VIEW_TYPE_ITEM) {
+            holder.binding.tvBeatName.text = beat.beatName
+            holder.binding.tvTotal.text = beat.total_customers.toString()
+            holder.binding.tvVisited.text = beat.visited_customers.toString()
+            holder.binding.tvRemaining.text = beat.remaining_customers.toString()
 
-          holder.itemView.tvBeatName.text = arr[position]!!.beatName
-
-          holder.itemView.tvTotal.text = arr[position]!!.total_customers.toString()
-          holder.itemView.tvVisited.text = arr[position]!!.visited_customers.toString()
-          holder.itemView.tvRemaining.text = arr[position]!!.remaining_customers.toString()
-
-            if(arr[position]!!.is_today){
-                holder.itemView.viewShade1.visibility = View.GONE
-                holder.itemView.viewShade.visibility = View.GONE
-                holder.itemView.cardBeat.setCardBackgroundColor(Color.parseColor("#ffffff"))
-                holder.itemView.cardBeat.cardElevation = 4f
-            }else{
-                holder.itemView.viewShade1.visibility = View.VISIBLE
-                holder.itemView.viewShade.visibility = View.VISIBLE
-                holder.itemView.cardBeat.setCardBackgroundColor(Color.parseColor("#FFFEF8"))
-                holder.itemView.cardBeat.cardElevation = 2f
+            if (beat.is_today) {
+                holder.binding.viewShade1.visibility = View.GONE
+                holder.binding.viewShade.visibility = View.GONE
+                holder.binding.cardBeat.setCardBackgroundColor(Color.parseColor("#ffffff"))
+                holder.binding.cardBeat.cardElevation = 4f
+            } else {
+                holder.binding.viewShade1.visibility = View.VISIBLE
+                holder.binding.viewShade.visibility = View.VISIBLE
+                holder.binding.cardBeat.setCardBackgroundColor(Color.parseColor("#FFFEF8"))
+                holder.binding.cardBeat.cardElevation = 2f
             }
 
-            holder.itemView.cardBeat.tag = position
-            holder.itemView.cardBeat.setOnClickListener { view ->
-                val pos= view.tag as Int
-                if(arr[pos]!!.is_today) {
-//                    Toast.makeText(mcontext,"Working on it..!!",Toast.LENGTH_SHORT).show()
-                    val intent = Intent(mcontext, BeatCustomerActivity::class.java)
-                    intent.putExtra("id", arr[pos]!!.beatId.toString())
-                    intent.putExtra("name", arr[pos]!!.beatName.toString())
-                    intent.putExtra("is_today", arr[pos]!!.is_today)
-                    if (arr[pos]!!.beatscheduleid != null)
-                        intent.putExtra("beat_schedule_id", arr[pos]!!.beatscheduleid.toString())
-                    else
-                        intent.putExtra("beat_schedule_id", "")
+            holder.binding.cardBeat.setOnClickListener {
+                if (beat.is_today) {
+                    val intent = Intent(mcontext, BeatCustomerActivity::class.java).apply {
+                        putExtra("id", beat.beatId.toString())
+                        putExtra("name", beat.beatName.toString())
+                        putExtra("is_today", beat.is_today)
+                        putExtra("beat_schedule_id", beat.beatscheduleid?.toString() ?: "")
+                    }
                     mcontext.startActivity(intent)
                 }
             }

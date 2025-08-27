@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#e7e7e7">
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark">
 
 
     <androidx.cardview.widget.CardView
@@ -55,18 +56,26 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_notification"
-        android:layout_below="@+id/linearTop"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:visibility="visible"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/notification_listing_layout"/>
+        android:background="@color/white"
+        android:layout_below="@+id/linearTop"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_notification"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/notification_listing_layout"/>
+
+
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
