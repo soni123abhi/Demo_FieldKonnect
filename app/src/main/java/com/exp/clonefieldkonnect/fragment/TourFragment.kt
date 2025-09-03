@@ -768,9 +768,10 @@ class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tab
                                     response.body()!!.message,
                                     Toast.LENGTH_LONG
                                 ).show()
-                                rec_user_main.visibility = View.VISIBLE
-                                rec_tour_view.visibility = View.GONE
-                                rec_tour_create.visibility = View.GONE
+                                startActivity(Intent(activityLocal,MainActivity::class.java))
+//                                rec_user_main.visibility = View.VISIBLE
+//                                rec_tour_view.visibility = View.GONE
+//                                rec_tour_create.visibility = View.GONE
                             } else {
                                 val jsonObject: JSONObject
                                 try {

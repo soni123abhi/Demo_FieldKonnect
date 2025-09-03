@@ -68,8 +68,8 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         
         statementHandler.img_call.setOnClickListener { 
             if (!item.contact!!.phoneNumber.isNullOrEmpty()){
-                Toast.makeText(activity,"Working on it..!!",Toast.LENGTH_SHORT).show()
-//                opencalldialog(item.contact!!.phoneNumber)
+//                Toast.makeText(activity,"Working on it..!!",Toast.LENGTH_SHORT).show()
+                opencalldialog(item.contact!!.phoneNumber)
             }
         }
         statementHandler.img_msg.setOnClickListener { 
@@ -154,7 +154,7 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
 
 
 
-    /*private fun opencalldialog(phoneNumber: String?) {
+    private fun opencalldialog(phoneNumber: String?) {
         phoneNumber?.let {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$it")
@@ -162,7 +162,7 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         } ?: run {
             Toast.makeText(activity, "Phone number not available", Toast.LENGTH_SHORT).show()
         }
-    }*/
+    }
 
 
     private inner class StatementHandler internal constructor(itemView: View) :
