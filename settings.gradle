@@ -1,5 +1,5 @@
-rootProject.name='Gajra'
+rootProject.name='FieldKonnect SFA'
 include ':app'
 include ':gaugelibrary'
-rootProject.name = "Gajra New Design"
+rootProject.name = "FieldKonnect SFA"
 include ':multiselectspinnerlibrary'

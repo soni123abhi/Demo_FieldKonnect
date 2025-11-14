@@ -76,6 +76,12 @@ class LeadDetailModel {
          @SerializedName("created_at_formatted")
          var createdAtFormatted: String? = null
 
+         @SerializedName("estimated_close_date")
+         var estimated_close_date: String? = null
+
+         @SerializedName("confidence")
+         var confidence: Int? = null
+
 
          @SerializedName("assignUser")
          var assignUse: AssignUser? = AssignUser()

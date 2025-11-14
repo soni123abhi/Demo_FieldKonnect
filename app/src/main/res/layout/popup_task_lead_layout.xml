@@ -150,6 +150,7 @@
                     android:layout_marginTop="10dp"
                     android:weightSum="2">
 
+
                     <AutoCompleteTextView
                         android:id="@+id/edtdate"
                         android:layout_below="@+id/edtpriority"

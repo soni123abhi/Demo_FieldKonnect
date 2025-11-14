@@ -20,6 +20,8 @@ import com.exp.clonefieldkonnect.model.ExpenseApprovalSubmitModel
 import com.exp.clonefieldkonnect.model.ExpenseTypeModel
 import com.exp.clonefieldkonnect.model.GetDiscountLimitModel
 import com.exp.clonefieldkonnect.model.InsertOrderRequestModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
+import com.exp.clonefieldkonnect.model.LeadCallLogDetailModel
 import com.exp.clonefieldkonnect.model.LeadContactModel
 import com.exp.clonefieldkonnect.model.LeadDetailModel
 import com.exp.clonefieldkonnect.model.LeadModel
@@ -214,11 +216,18 @@ interface BaseApiService {
         @Header("Authorization") authorization: String?,
         @QueryMap queryParams: Map<String, String>
     ): Call<JsonObject>
+
     @Headers("Accept: application/json")
     @GET("getUserSataus")
     abstract fun getUserSataus(
         @Header("Authorization") authorization: String?,
     ): Call<UserActiveModel>
+
+    @Headers("Accept: application/json")
+    @GET("get-last-call")
+    abstract fun getLastCallremark(
+        @Header("Authorization") authorization: String?,
+    ): Call<LastCallRemarkModel>
 
     @GET("getBeatList")
     abstract fun getBeatList(
@@ -625,6 +634,12 @@ interface BaseApiService {
         @QueryMap queryParams: Map<String, String>,
     ): Call<LeadModel>
 
+    @GET("get-call-logs")
+    abstract fun getleadlogdetaill(
+        @Header("Authorization") authorization: String?,
+        @QueryMap queryParams: Map<String, String>,
+    ): Call<LeadCallLogDetailModel>
+
     @GET("getLeadTasks")
     abstract fun getleadtaskk(
         @Header("Authorization") authorization: String?,
@@ -755,6 +770,12 @@ interface BaseApiService {
 
     @POST("addCheckinDraft")
     abstract fun submitdraftreport(
+        @Header("Authorization") authorization: String?,
+        @QueryMap queryParams: Map<String, String>,
+    ): Call<AttendanceSubmitModel>
+
+    @POST("update-call-remark")
+    abstract fun submitCallremarkk(
         @Header("Authorization") authorization: String?,
         @QueryMap queryParams: Map<String, String>,
     ): Call<AttendanceSubmitModel>
@@ -914,6 +935,12 @@ interface BaseApiService {
 
     @POST("leadCreate")
     abstract fun submitcreatelead(
+        @Header("Authorization") authorization: String?,
+        @QueryMap queryParams: Map<String, String>,
+    ): Call<AttendanceSubmitModel>
+
+    @POST("add-call-logs")
+    abstract fun submitleadcalloggg(
         @Header("Authorization") authorization: String?,
         @QueryMap queryParams: Map<String, String>,
     ): Call<AttendanceSubmitModel>

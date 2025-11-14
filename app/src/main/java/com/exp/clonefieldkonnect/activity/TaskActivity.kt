@@ -41,8 +41,11 @@ import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.LeadTaskModel
 import com.exp.clonefieldkonnect.model.TaskDropdownModel
 import com.exp.clonefieldkonnect.model.TaskManagemnetModel
@@ -65,7 +68,8 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class TaskActivity : AppCompatActivity(),LeadTaskListAdapter.OnEmailClick,TaskManagementAdapter.OnEmailClick{
+class TaskActivity : AppCompatActivity(),LeadTaskListAdapter.OnEmailClick,TaskManagementAdapter.OnEmailClick
+,LastCallRemarkListener{
     lateinit var cardBack_activity: CardView
     lateinit var card_leadtask: CardView
     lateinit var relll_lead_task: RelativeLayout
@@ -129,6 +133,7 @@ class TaskActivity : AppCompatActivity(),LeadTaskListAdapter.OnEmailClick,TaskMa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
 
         initViews()
     }
@@ -1268,6 +1273,12 @@ class TaskActivity : AppCompatActivity(),LeadTaskListAdapter.OnEmailClick,TaskMa
             responsemessage("Task is already Completed!")
         }else{
             opentaskalertdialog(id.toString(),task_status)
+        }
+    }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
         }
     }
 

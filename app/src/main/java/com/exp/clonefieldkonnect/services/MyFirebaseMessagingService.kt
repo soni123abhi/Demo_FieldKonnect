@@ -53,7 +53,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         val builder = NotificationCompat.Builder(this, "lumax")
-            .setSmallIcon(R.drawable.app_logo)
+            .setSmallIcon(R.drawable.gajra_gear_log)
             .setContentTitle(title)
             .setContentText(message)
             .setContentIntent(pendingIntent)

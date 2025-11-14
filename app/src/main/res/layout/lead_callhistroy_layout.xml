@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/edittext_shape_new"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ic_user_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_lead_user_profile"/>
+
+       <!-- <ImageView
+            android:id="@+id/ic_user_profile"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_lead_user_profile" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:layout_toLeftOf="@+id/card_duration"
+                android:hint="Contact name"
+                android:textAlignment="textStart"
+                android:textColor="#4B4B4B">
+            </TextView>
+
+            <TextView
+                android:id="@+id/user_mob_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/card_duration"
+                android:layout_below="@+id/user_name"
+                android:fontFamily="@font/inter_medium"
+                android:hint="+91xxxxxxxx"
+                android:textAlignment="textStart"
+                android:textColor="#565656">
+
+            </TextView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_duration"
+                android:layout_toLeftOf="@+id/card_status"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <RelativeLayout
+                    android:id="@+id/relll_durr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000040">
+
+                    <TextView
+                        android:id="@+id/tv_call_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:hint="00:00"
+                        android:textAlignment="center"
+                        android:textColorHint="#4B4B4B"
+                        android:textColor="@android:color/black" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_status"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="0dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <RelativeLayout
+                    android:id="@+id/relll_statuss"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFE3DD">
+
+                    <TextView
+                        android:id="@+id/tv_lead_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:hint="No Response"
+                        android:textAlignment="center"
+                        android:textColorHint="#4D2F28"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

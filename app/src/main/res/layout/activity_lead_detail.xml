@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#e7e7e7"
+        android:background="#f2f2f4"
         android:layout_height="match_parent">
 
 
@@ -386,27 +386,49 @@
 
             </RelativeLayout>
 
-
-            <TextView
-                android:id="@+id/tvuser_notee"
+            <LinearLayout
+                android:id="@+id/linn_noteeee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="1"
                 android:layout_below="@+id/rel_source"
-                android:minHeight="40dp"
-                android:drawableLeft="@drawable/ic_lead_note"
-                android:drawablePadding="8dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:hint="Note"
-                android:textColorHint="#716C6C"
-                android:fontFamily="@font/inter_regular"
-                android:textColor="#4B4B4B"
-                android:textSize="14sp" />
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_lead_note" />
+
+                <TextView
+                    android:id="@+id/tvuser_notee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/inter_regular"
+                    android:textColor="#4B4B4B"
+                    android:textSize="14sp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:textColorHint="#716C6C"
+                    android:hint="Note"
+                    android:includeFontPadding="false"
+                    />
+
+
+            </LinearLayout>
+
 
 
             <LinearLayout
                 android:id="@+id/linearbtn"
-                android:layout_below="@+id/tvuser_notee"
+                android:layout_below="@+id/linn_noteeee"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:weightSum="2"

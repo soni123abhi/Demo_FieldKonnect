@@ -30,6 +30,9 @@ class LeadModel {
         @SerializedName("address")
         var address: String? = null
 
+        @SerializedName("location_address")
+        var locationaddress: String? = null
+
         @SerializedName("city")
         var city: String? = null
 

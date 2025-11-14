@@ -38,6 +38,8 @@ import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.worker.WorkerLocation
 import com.bumptech.glide.Glide
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.model.*
 import com.exp.clonefieldkonnect.worker.LocationForegroundService
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -56,7 +58,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(), View.OnClickListener,
-    DashBoardNewDesingFragment.PunchInDetails {
+    DashBoardNewDesingFragment.PunchInDetails, LastCallRemarkListener {
 
     lateinit var linearTop: CardView
     lateinit var relativeProfile: RelativeLayout
@@ -124,6 +126,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     lateinit var nav_view: NavigationView
     lateinit var three_dot: CardView
 
+
+    private var pendingRemarkData: LastCallRemarkModel.Data? = null
+
+
     companion object {
         lateinit var drawerLayout: DrawerLayout
         var tabPosition = 0
@@ -132,6 +138,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Register listener in Application
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
+
         initViews()
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -292,7 +302,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         val permissions = mutableListOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            )
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.READ_CALL_LOG ,
+            Manifest.permission.READ_PHONE_STATE
+        )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             permissions.add(Manifest.permission.POST_NOTIFICATIONS)
@@ -304,6 +317,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             permissionId
         )
     }
+
     @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -1382,5 +1396,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             .build()
         WorkManager.getInstance().enqueue(workerRequest)
     }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
+    }
+
 
 }

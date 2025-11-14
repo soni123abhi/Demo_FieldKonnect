@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Clone Field Konnect</string>
+    <string name="app_name">FieldKonnect SFA</string>
     <string name="error_no_internet">No internet connection</string>
     <string name="poor_connection">Poor connection</string>
     <string name="data_not_found">Data not found</string>

@@ -30,8 +30,11 @@ import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.LeadContactModel
 import com.exp.clonefieldkonnect.model.OportunityDetailModel
 import com.exp.import.Utilities
@@ -39,7 +42,7 @@ import org.json.JSONObject
 import retrofit2.Response
 
 class OpportunityViewActivity : AppCompatActivity(),LeadopportunityStatusAdapter.OnEmailClick,
-    OpportunityListAdapter.OnEmailClick{
+    OpportunityListAdapter.OnEmailClick,LastCallRemarkListener{
     lateinit var cardBack_activity: CardView
     lateinit var recyclerView_lead_status: RecyclerView
     lateinit var recyclerView_oppoo: RecyclerView
@@ -84,6 +87,7 @@ class OpportunityViewActivity : AppCompatActivity(),LeadopportunityStatusAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opportunity_view)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
         initViews()
 
     }
@@ -737,6 +741,11 @@ class OpportunityViewActivity : AppCompatActivity(),LeadopportunityStatusAdapter
             })
     }
 
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
+    }
 
 
 }

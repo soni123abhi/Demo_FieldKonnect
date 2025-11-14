@@ -9,9 +9,12 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Location
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.text.Editable
 import android.text.Html
 import android.text.Spanned
@@ -21,6 +24,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
@@ -42,14 +46,18 @@ import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
 import com.exp.clonefieldkonnect.helper.GPSTracker
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.LeadContactModel
 import com.exp.clonefieldkonnect.model.LeadDetailModel
 import com.exp.clonefieldkonnect.model.LeadStatusSourceModel
 import com.exp.clonefieldkonnect.model.TaskDropdownModel
 import com.exp.import.Utilities
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
@@ -58,7 +66,7 @@ import com.google.gson.JsonObject
 import org.json.JSONObject
 import retrofit2.Response
 
-class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailClick{
+class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailClick,LastCallRemarkListener{
     lateinit var cardBack_activity: CardView
     lateinit var carddddd_editt: CardView
     lateinit var ic_logo_name: TextView
@@ -84,12 +92,20 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
     lateinit var img_task: ImageView
     lateinit var img_opportunity: ImageView
     lateinit var img_activity: ImageView
+    lateinit var ic_notification: ImageView
 
     private val REQUEST_CHECK_SETTINGS = 0x1
     private val REQUEST_VISIT_REPORT = 114
     private var mGoogleApiClient: GoogleApiClient? = null
     var latitude: String? = null
     var longitude: String? = null
+
+    var onlocation  = 0
+
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var latitude_edit:  String? = null
+    var longitude_edit:  String? = null
+
 
     private var isLoading = false
     private var lead_response : LeadDetailModel.Data? = null
@@ -140,6 +156,7 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lead_detail)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
         initViews()
 
     }
@@ -170,6 +187,7 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         img_opportunity = findViewById(R.id.img_opportunity)
         img_activity = findViewById(R.id.img_activity)
         notification_count = findViewById(R.id.notification_count)
+        ic_notification = findViewById(R.id.ic_notification)
 
         lead_id = intent.getStringExtra("lead_id").toString()
 
@@ -190,14 +208,16 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
             getleaddetail(lead_id)
         }
 
+        ic_notification.setOnClickListener {
+            startActivity(Intent(this@LeadDetailActivity,NotificationActivity::class.java))
+        }
+
         edtleadtype.setOnClickListener {
             spinnerstatus(edtleadtype)
         }
 
         getleadstatussource()
         gettaskdropdown()
-
-
 
         println("lead_idlead_id=="+lead_id)
 
@@ -966,6 +986,7 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         val edtState: EditText = view.findViewById(R.id.edtState)
         val edtCity: EditText = view.findViewById(R.id.edtCity)
         val edtdistric: EditText = view.findViewById(R.id.edtdistric)
+        val checkbox_location: CheckBox = view.findViewById(R.id.checkbox_location)
 
         edtleadtype.visibility = View.GONE
         edtleadsource.visibility = View.GONE
@@ -997,10 +1018,23 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         selectedtaskuser_id = lead_response!!.assign_user_id.toString()
 
 
+        checkbox_location.setOnClickListener {
+            if (checkbox_location.isChecked){
+                onlocation = 1
+                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                getLocation()
+            }else{
+                onlocation = 0
+                latitude_edit = null
+                longitude_edit = null
+            }
+        }
+
+
 
         cardSubmit.setOnClickListener {
             println("AAAAAAA=="+selectedtype_id+"<<"+edtfirmname.text.toString()+"<<"+edtcustomername.text.toString()+"<<"+
-                    edtmobno.text.toString()+"<<"+selectedsource_id)
+                    edtmobno.text.toString()+"<<"+selectedsource_id+"<<"+onlocation+"<<"+latitude_edit+"<<"+longitude_edit)
             if (selectedtype_id.isNullOrEmpty()){
                 responsemessage("Please Select Lead Type")
             }else if (edtfirmname.text.isNullOrEmpty()){
@@ -1015,7 +1049,7 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
                 submitedit(selectedtype_id,edtfirmname.text.toString(),edtcustomername.text.toString(),
                     edtmobno.text.toString(),edtemail.text.toString(),edtadd.text.toString(),
                     pincode_id,state_id,city_id,district_id,selectedsource_id,edtnote.text.toString(),edtwebsite.text.toString(),
-                    alertDialog,lead_id,selectedtaskuser_id)
+                    alertDialog,lead_id,selectedtaskuser_id,onlocation,latitude_edit,longitude_edit)
             }
         }
 
@@ -1067,6 +1101,59 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         alertDialog = builder.create()
         alertDialog.show()
 
+    }
+
+    private fun getLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return
+                }
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    val location: Location? = task.result
+                    if (location != null) {
+                        latitude_edit = location.latitude.toString()
+                        longitude_edit = location.longitude.toString()
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
     }
 
     private fun submittask(
@@ -1409,7 +1496,10 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         edtwebsite: String,
         alertDialog: AlertDialog,
         lead_id: String,
-        selectedtaskuser_id: String
+        selectedtaskuser_id: String,
+        onlocation: Int,
+        latitude_edit: String?,
+        longitude_edit: String?
     ) {
         if (!Utilities.isOnline(this@LeadDetailActivity)) {
             return
@@ -1431,6 +1521,9 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         queryParams["lead_source"] = selectedsourceId
         queryParams["note"] = edtnote
         queryParams["assign_to"] = selectedtaskuser_id
+        queryParams["on_location"] = onlocation.toString()
+        queryParams["latitude"] =  latitude_edit ?: "0.0"
+        queryParams["longitude"] = longitude_edit ?: "0.0"
 
         ApiClient.submitcreatelead(
             StaticSharedpreference.getInfo(Constant.ACCESS_TOKEN, this@LeadDetailActivity).toString(),
@@ -2138,5 +2231,11 @@ class LeadDetailActivity : AppCompatActivity(),LeadActivityLeadAdapter.OnEmailCl
         builder.setView(view)
         alertDialog = builder.create()
         alertDialog.show()
+    }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
     }
 }

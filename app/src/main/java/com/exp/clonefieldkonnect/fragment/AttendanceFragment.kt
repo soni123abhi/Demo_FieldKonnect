@@ -262,12 +262,12 @@ class AttendanceFragment : Fragment(), View.OnClickListener {
 
                 if (punchInOrOut == "in") {
 
-                    if(todayTourId=="" && !StaticSharedpreference.getBoolean(Constant.todayBeatSchedule, activityLocal)
+                   /* if(todayTourId=="" && !StaticSharedpreference.getBoolean(Constant.todayBeatSchedule, activityLocal)
                         && !StaticSharedpreference.getBoolean(Constant.beatUser, activityLocal)){
                         Toast.makeText(activityLocal, "Please Make Today's Tour Plan", Toast.LENGTH_LONG).show()
                         return
-                    }
-                    else if(spinnerPlan.text.toString()=="" && !StaticSharedpreference.getBoolean(Constant.todayBeatSchedule, activityLocal)){
+                    }*/
+                     if(spinnerPlan.text.toString()=="" && !StaticSharedpreference.getBoolean(Constant.todayBeatSchedule, activityLocal)){
                         Toast.makeText(activityLocal, "Please select Type", Toast.LENGTH_LONG).show()
                         return
                     }

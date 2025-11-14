@@ -14,14 +14,17 @@ import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.NotificationModel
 import com.exp.import.Utilities
 import org.json.JSONObject
 import retrofit2.Response
 
-class NotificationActivity : AppCompatActivity(),NotificationAdapter.OnEmailClick {
+class NotificationActivity : AppCompatActivity(),NotificationAdapter.OnEmailClick,LastCallRemarkListener {
     lateinit var cardBack_activity: CardView
     lateinit var recyclerView_notification: RecyclerView
 
@@ -39,6 +42,7 @@ class NotificationActivity : AppCompatActivity(),NotificationAdapter.OnEmailClic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
         initViews()
 
     }
@@ -216,5 +220,11 @@ class NotificationActivity : AppCompatActivity(),NotificationAdapter.OnEmailClic
                     }
                 }
             })
+    }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
     }
 }

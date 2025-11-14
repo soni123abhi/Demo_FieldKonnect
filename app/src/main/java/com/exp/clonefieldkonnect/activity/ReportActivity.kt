@@ -29,9 +29,12 @@ import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.fragment.add
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceDetailModel
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.UserAttendanceListModel
 import com.exp.import.Utilities
 import org.json.JSONObject
@@ -39,7 +42,8 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReportActivity : AppCompatActivity() ,View.OnClickListener,ReportAdapter.OnEmailClick,AttendanceReportAdapter.OnEmailClick{
+class ReportActivity : AppCompatActivity() ,View.OnClickListener,ReportAdapter.OnEmailClick,AttendanceReportAdapter.OnEmailClick
+,LastCallRemarkListener{
 //    private val nameWithImageList = ArrayList<NameWithImage>()
     var id_main : Int = 0
     private var lastPosition = -1
@@ -78,6 +82,7 @@ class ReportActivity : AppCompatActivity() ,View.OnClickListener,ReportAdapter.O
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
         initViews()
     }
 
@@ -632,6 +637,12 @@ class ReportActivity : AppCompatActivity() ,View.OnClickListener,ReportAdapter.O
         val tvTo = outputFormat.format(tvToParsed)
 
         return Pair(tvfrom,tvTo)
+    }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
     }
 
 

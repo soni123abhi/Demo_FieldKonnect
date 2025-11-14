@@ -7,8 +7,11 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.exp.clonefieldkonnect.R
 import com.exp.clonefieldkonnect.fragment.AttendanceFragment
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 
-class AttendanceActivity : AppCompatActivity() {
+class AttendanceActivity : AppCompatActivity(),LastCallRemarkListener {
 
     private lateinit var cardBack: CardView
 
@@ -20,6 +23,8 @@ class AttendanceActivity : AppCompatActivity() {
         working_type = intent.getStringExtra("working_type_").toString()
         punchin_flag = intent.getStringExtra("punchin_flag_").toString()
         println("punchin_flag 1 ${punchin_flag}")
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
+
         initViews()
     }
 
@@ -52,6 +57,12 @@ class AttendanceActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+    }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
     }
 
 }

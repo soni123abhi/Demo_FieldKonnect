@@ -5,6 +5,8 @@ object Constant {
     val USERID= "userId"
     val Lead_check_in= "Leadcheckin"
     val Lead_check_in_leadID= "Lead_checkinleadID"
+    val CALLING_NUMBER= "CALLING_NUMBER"
+    val Call_lead_id= "Call_lead_id"
     val ACCESS_TOKEN= "accessToken"
     val TabPosition= "tab_postion"
 

@@ -15,6 +15,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
+import com.exp.clonefieldkonnect.activity.LeadActivity
+import com.exp.clonefieldkonnect.helper.CallStatusListener
+import com.exp.clonefieldkonnect.helper.CallTracker
+import com.exp.clonefieldkonnect.helper.Constant
+import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.LeadModel
 
 class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<LeadModel.Data_lead>, var onClickEmail1: OnEmailClick) :
@@ -64,19 +69,23 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
 
         statementHandler.img_view.setOnClickListener {
             onClickEmail1.onClicklead(item.id)
+//            activity.startActivity(Intent(activity,CustomerMapActivity::class.java))
         }
         
-        statementHandler.img_call.setOnClickListener { 
+        statementHandler.img_call.setOnClickListener {
             if (!item.contact!!.phoneNumber.isNullOrEmpty()){
+                StaticSharedpreference.saveInfo(Constant.Call_lead_id, item.id!!.toString(),activity)
 //                Toast.makeText(activity,"Working on it..!!",Toast.LENGTH_SHORT).show()
-                opencalldialog(item.contact!!.phoneNumber)
+                opencalldialog(item.contact!!.phoneNumber!!,item.id!!)
             }
         }
-        statementHandler.img_msg.setOnClickListener { 
+        statementHandler.img_msg.setOnClickListener {
             if (!item.contact!!.phoneNumber.isNullOrEmpty()){
                 openEmailDialog(item.contact!!.phoneNumber)
             }
         }
+
+
         statementHandler.img_whatsapp.setOnClickListener { 
             if (!item.contact!!.phoneNumber.isNullOrEmpty()){
                 openwhatsappdialog(item.contact!!.phoneNumber)
@@ -84,7 +93,11 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         }
         statementHandler.img_location.setOnClickListener {
             if (!item.address!!.isNullOrEmpty()){
-                openmapdialog(item.address!!)
+                if (item.locationaddress.equals("N/A")){
+                    openmapdialog(item.address!!)
+                }else{
+                    openmapdialog(item.locationaddress!!)
+                }
             }
         }
 
@@ -152,9 +165,62 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
         }
     }
 
+    /*private fun opencalldialog(phoneNumber: String?, id: Int) {
+        phoneNumber?.let { number ->
+
+            // start service first
+            val serviceIntent = Intent(activity, CallTrackingService::class.java)
+            activity.startForegroundService(serviceIntent)  // Android O+
+
+            // then make the call
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$number")
+            activity.startActivity(intent)
+        } ?: run {
+            Toast.makeText(activity, "Phone number not available", Toast.LENGTH_SHORT).show()
+        }
+    }*/
 
 
-    private fun opencalldialog(phoneNumber: String?) {
+
+
+    private fun opencalldialog(phoneNumber: String?, id: Int) {
+        phoneNumber?.let { number ->
+            CallTracker.startTracking(activity, object : CallStatusListener {
+                override fun onCallEnded(number: String, duration: Int, callStatus: Int, dateTime: String) {
+                    println("📲 Call ended → number=$number, duration=$duration, status=$callStatus, time=$dateTime")
+                }
+            })
+
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$number")
+            StaticSharedpreference.saveInfo(Constant.CALLING_NUMBER, number, activity)
+            activity.startActivity(intent)
+        } ?: run {
+            Toast.makeText(activity, "Phone number not available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /*private fun opencalldialog(phoneNumber: String?, id: Int) {
+         phoneNumber?.let { number ->
+
+             CallTracker.startTracking(activity, object : CallStatusListener {
+                 override fun onCallEnded(number: String, duration: Int, callStatus: Int, dateTime: String) {
+                     println("📲 Call ended → number=$number, duration=$duration, status=$callStatus, time=$dateTime")
+                     onClickEmail1.oncalllead(id,number,duration,callStatus,dateTime)
+                 }
+             })
+
+             val intent = Intent(Intent.ACTION_CALL)
+             intent.data = Uri.parse("tel:$number")
+             activity.startActivity(intent)
+         } ?: run {
+             Toast.makeText(activity, "Phone number not available", Toast.LENGTH_SHORT).show()
+         }
+     }*/
+
+
+    /*private fun opencalldialog(phoneNumber: String?) {
         phoneNumber?.let {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$it")
@@ -163,7 +229,7 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
             Toast.makeText(activity, "Phone number not available", Toast.LENGTH_SHORT).show()
         }
     }
-
+*/
 
     private inner class StatementHandler internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -193,4 +259,6 @@ class LeadListAdapter(var activity: Activity, var useractivitylist: ArrayList<Le
     interface OnEmailClick {
         fun onClicklead(id: Int?)
     }
+
+
 }

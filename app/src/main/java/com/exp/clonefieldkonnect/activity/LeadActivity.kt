@@ -1,12 +1,15 @@
 package com.exp.clonefieldkonnect.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import android.telephony.PhoneStateListener
-import android.telephony.TelephonyManager
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -14,6 +17,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -24,6 +28,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.clonefieldkonnect.R
@@ -33,26 +38,31 @@ import com.exp.clonefieldkonnect.connection.APIResultLitener
 import com.exp.clonefieldkonnect.connection.ApiClient
 import com.exp.clonefieldkonnect.helper.Constant
 import com.exp.clonefieldkonnect.helper.DialogClass
+import com.exp.clonefieldkonnect.helper.LastCallRemarkListener
+import com.exp.clonefieldkonnect.helper.MyApplication
 import com.exp.clonefieldkonnect.helper.StaticSharedpreference
 import com.exp.clonefieldkonnect.model.AttendanceSubmitModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
 import com.exp.clonefieldkonnect.model.LeadModel
 import com.exp.clonefieldkonnect.model.LeadStatusSourceModel
 import com.exp.clonefieldkonnect.model.TaskDropdownModel
 import com.exp.import.Utilities
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.JsonObject
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter.OnEmailClick,
-    LeadListAdapter.OnEmailClick{
+    LeadListAdapter.OnEmailClick,LastCallRemarkListener{
     lateinit var cardBack_activity: CardView
     lateinit var card_opoo_btn: CardView
     lateinit var img_create: ImageView
     lateinit var ic_notification: ImageView
+    lateinit var ic_call_his: ImageView
     lateinit var recyclerView_lead_status: RecyclerView
     lateinit var recyclerView_useractivity: RecyclerView
     lateinit var searchIcon: ImageView
@@ -66,6 +76,11 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
     private var page = 1
     private var pageSize = "30"
     var page_count : String = ""
+    var onlocation  = 0
+
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var latitude:  String? = null
+    var longitude:  String? = null
 
     var leadstatuslist: ArrayList<LeadModel.Counts> = ArrayList()
     var leadlist: ArrayList<LeadModel.Data_lead> = ArrayList()
@@ -103,6 +118,7 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lead)
+        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
         initViews()
     }
 
@@ -117,6 +133,7 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         filter = findViewById(R.id.filter)
         ic_notification = findViewById(R.id.ic_notification)
         notification_count = findViewById(R.id.notification_count)
+        ic_call_his = findViewById(R.id.ic_call_his)
 
         lead_checkin_lead_id = StaticSharedpreference.getInfo(Constant.Lead_check_in_leadID, this@LeadActivity).toString()
 
@@ -135,6 +152,10 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
 
         ic_notification.setOnClickListener {
             startActivity(Intent(this@LeadActivity,NotificationActivity::class.java))
+        }
+
+        ic_call_his.setOnClickListener {
+            startActivity(Intent(this@LeadActivity,LeadCallDetailActivity::class.java))
         }
 
         gettaskdropdown()
@@ -280,7 +301,6 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
             edtStatus!!.setText(selectedsource_name)
         }
 
-
         edtSearch!!.setOnClickListener {
             spinnerusername(edtSearch!!)
         }
@@ -313,7 +333,6 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
             dialog.dismiss()
         }
 
-
         btnApply!!.setOnClickListener {
 
             if (tvFrom!!.text.toString().isNotEmpty() && tvTo!!.text.toString().isNotEmpty()){
@@ -328,8 +347,6 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
             dialog.dismiss()
 
         }
-
-
 
         dialog.show()
     }
@@ -395,14 +412,12 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
 
                 println("Abhi=id=$selectedtaskuser_id")
 
-
                 dialog.dismiss()
             }
         }
 
         dialog.show() // Show the dialog
     }
-
 
 
     private fun getlead(
@@ -634,10 +649,11 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         val edtState: EditText = view.findViewById(R.id.edtState)
         val edtCity: EditText = view.findViewById(R.id.edtCity)
         val edtdistric: EditText = view.findViewById(R.id.edtdistric)
+        val checkbox_location: CheckBox = view.findViewById(R.id.checkbox_location)
 
         cardSubmit.setOnClickListener {
             println("AAAAAAA=="+selectedtype_id+"<<"+edtfirmname.text.toString()+"<<"+edtcustomername.text.toString()+"<<"+
-                    edtmobno.text.toString()+"<<"+selectedsource_id)
+                    edtmobno.text.toString()+"<<"+selectedsource_id+"<<"+onlocation+"<<"+latitude+"<<"+longitude)
             if (selectedtype_id.isNullOrEmpty()){
                 responsemessage("Please Select Lead Type")
             }else if (edtfirmname.text.isNullOrEmpty()){
@@ -652,7 +668,19 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
                 submitcreate(selectedtype_id,edtfirmname.text.toString(),edtcustomername.text.toString(),
                     edtmobno.text.toString(),edtemail.text.toString(),edtadd.text.toString(),
                     pincode_id,state_id,city_id,district_id,edtotherrr.text.toString(),selectedsource_id,edtnote.text.toString(),
-                    alertDialog)
+                    alertDialog,onlocation,latitude,longitude)
+            }
+        }
+
+        checkbox_location.setOnClickListener {
+            if (checkbox_location.isChecked){
+                onlocation = 1
+                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                getLocation()
+            }else{
+                onlocation = 0
+                latitude = null
+                longitude = null
             }
         }
 
@@ -699,6 +727,107 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         alertDialog.show()
     }
 
+    private fun getLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return
+                }
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    val location: Location? = task.result
+                    if (location != null) {
+                        latitude = location.latitude.toString()
+                        longitude = location.longitude.toString()
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+//    private fun submitleadcalldetails(id: Int?, number: String, duration: Int, callStatus: Int, dateTime: String) {
+//
+//        println("📲 Call endedDDDDDDDDDD Finalll→ number=$number, duration=$duration, status=$callStatus, time=$dateTime ,id==$id")
+//
+//        if (!Utilities.isOnline(this@LeadActivity)) {
+//            return
+//        }
+//        var dialog = DialogClass.progressDialog(this@LeadActivity)
+//        val queryParams = java.util.HashMap<String, String>()
+//        queryParams["lead_id"] = id.toString()
+//        queryParams["started_at"] = dateTime
+//        queryParams["duration"] = duration.toString()
+//        queryParams["status"] = callStatus.toString()
+//        queryParams["number"] = number
+//
+//        ApiClient.submitleadcalllog(
+//            StaticSharedpreference.getInfo(Constant.ACCESS_TOKEN, this@LeadActivity).toString(),
+//            queryParams,
+//            object : APIResultLitener<AttendanceSubmitModel> {
+//                @SuppressLint("NotifyDataSetChanged")
+//                override fun onAPIResult(
+//                    response: Response<AttendanceSubmitModel>?,
+//                    errorMessage: String?
+//                ) {
+//                    dialog.dismiss()
+//                    if (response != null && errorMessage == null) {
+//
+//                        if (response.code() == 200) {
+////                            Toast.makeText(this@LeadActivity, response.body()!!.message, Toast.LENGTH_LONG).show()
+//                        } else {
+//                            val jsonObject: JSONObject
+//                            try {
+//                                jsonObject = JSONObject(response.errorBody()!!.string())
+//
+//                                DialogClass.alertDialog(
+//                                    jsonObject.getString("status"),
+//                                    jsonObject.getString("message"),
+//                                    this@LeadActivity, false
+//                                )
+//                            } catch (e: Exception) {
+//                                e.printStackTrace()
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//    }
+
     private fun submitcreate(
         selectedtypeId: String,
         edtfirmname: String,
@@ -713,7 +842,10 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         edtotherrr: String,
         selectedsourceId: String,
         edtnote: String,
-        alertDialog: AlertDialog
+        alertDialog: AlertDialog,
+        onlocation: Int,
+        latitude: String?,
+        longitude: String?
     ) {
         if (!Utilities.isOnline(this@LeadActivity)) {
             return
@@ -733,6 +865,9 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
         queryParams["other"] = edtotherrr
         queryParams["lead_source"] = selectedsourceId
         queryParams["note"] = edtnote
+        queryParams["on_location"] = onlocation.toString()
+        queryParams["latitude"] = latitude ?: "0.0"
+        queryParams["longitude"] = longitude ?: "0.0"
 
         ApiClient.submitcreatelead(
             StaticSharedpreference.getInfo(Constant.ACCESS_TOKEN, this@LeadActivity).toString(),
@@ -998,4 +1133,31 @@ class LeadActivity : AppCompatActivity(), View.OnClickListener,LeadStatusAdapter
             startActivity(intent)
         }
     }
+
+    override fun onLastCallRemarkRequired(data: LastCallRemarkModel.Data) {
+        runOnUiThread {
+            MyApplication.getInstance().showRemarkPopupGlobal(data, this)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("acctivityyy"+"onResume")
+//        (application as MyApplication).lastCallRemarkListener = this // ✅ This works because MainActivity implements the interface
+    }
+
+
+
+    /* override fun oncalllead(
+         id: Int?,
+         number: String,
+         duration: Int,
+         callStatus: Int,
+         dateTime: String
+     ) {
+         println("📲 Call ended Finalll→ number=$number, duration=$duration, status=$callStatus, time=$dateTime ,id==$id")
+         submitleadcalldetails(id,number,duration,callStatus,dateTime)
+     }*/
+
+
 }

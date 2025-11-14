@@ -74,6 +74,7 @@ class ExpenseApprovalFragment(
     lateinit var cardFrom: LinearLayout
     lateinit var cardTo: LinearLayout
     lateinit var tvFrom: TextView
+    lateinit var tv_user_date: TextView
     lateinit var tvTo: TextView
     lateinit var cardSearch: RelativeLayout
     lateinit var rel_main_expense: RelativeLayout
@@ -408,6 +409,7 @@ class ExpenseApprovalFragment(
         rec_user_main2 = rootView.findViewById(R.id.rec_user_main2)
         recyclerView_user_detail = rootView.findViewById(R.id.recyclerView_user_detail)
         edtexpensetype = rootView.findViewById(R.id.edtexpensetype)
+        tv_user_date = rootView.findViewById(R.id.tv_user_date)
 
         rec_user_main2.visibility = View.GONE
         rel_main_expense.visibility = View.VISIBLE
@@ -620,7 +622,7 @@ class ExpenseApprovalFragment(
         val tv_note_msg: TextView = view.findViewById(R.id.tv_note_msg)
         val tv_note_reason: TextView = view.findViewById(R.id.tv_note_reason)
         val tv_note_reason_msg: TextView = view.findViewById(R.id.tv_note_reason_msg)
-        val tv_user_date: TextView = view.findViewById(R.id.tv_user_date)
+//        val tv_user_date: TextView = view.findViewById(R.id.tv_user_date)
         val listView_attach_view: ListView = view.findViewById(R.id.listView_attach_view)
 
         val tv_today_plan: TextView = view.findViewById(R.id.tv_today_plan)

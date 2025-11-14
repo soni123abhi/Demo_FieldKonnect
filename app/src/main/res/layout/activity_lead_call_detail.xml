@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/linearTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#304789"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="15dp"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBack"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_lead_back_blue" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/ic_logo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/call_head_icon"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/cardBack"/>
+
+
+
+            <TextView
+                android:id="@+id/opportunityBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ic_logo"
+                android:layout_marginTop="9dp"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:text="Calling Management"
+                android:textSize="15dp"
+                android:textColor="@android:color/white" />
+
+
+            <ImageView
+                android:id="@+id/ic_notification"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_call_mag_filter"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="10dp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/linearTop"
+        android:background="#f2f2f4"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rel_filterss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF">
+
+            <LinearLayout
+                android:id="@+id/linearh2"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/lin_user"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:layout_marginRight="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lead_call_user"
+                        android:layout_marginEnd="8dp" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edtleaduser"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginEnd="5dp"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:hint="Search by user"
+                        android:textColorHint="#565656"
+                        android:textSize="14sp"
+                        android:theme="@style/MyEditTextThemeColor" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_spinner"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lin_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lead_call_date"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/edtleaddate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/inter_regular"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:hint="Select Date"
+                        android:textColorHint="#565656"
+                        android:textSize="14sp"
+                        android:theme="@style/MyEditTextThemeColor" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_spinner"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel"
+            android:layout_below="@+id/rel_filterss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linearh111"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:layout_marginRight="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_dial_call_icon"
+                        android:layout_marginEnd="8dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/call_dial_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:singleLine="true"
+                            android:text="Call Dialed"
+                            android:textColor="#4B4B4B"
+                            android:fontFamily="@font/inter_medium">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/call_dial_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:layout_below="@+id/call_dial_head"
+                            android:text="0"
+                            android:textSize="20dp"
+                            android:textColor="#565656"
+                            android:fontFamily="@font/inter_bold">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon21"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lead_call_conected"
+                        android:layout_marginEnd="8dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/call_conected_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:singleLine="true"
+                            android:text="Connect Call"
+                            android:textColor="#4B4B4B"
+                            android:fontFamily="@font/inter_medium">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/call_connect_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:layout_below="@+id/call_conected_head"
+                            android:text="0"
+                            android:textSize="20dp"
+                            android:textColor="#565656"
+                            android:fontFamily="@font/inter_bold">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearh222"
+                android:layout_below="@+id/linearh111"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:layout_marginRight="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon31"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lead_noresponse"
+                        android:layout_marginEnd="8dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/call_noresponse_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:singleLine="true"
+                            android:text="No Response"
+                            android:textColor="#4B4B4B"
+                            android:fontFamily="@font/inter_medium">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/call_noresponse_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:layout_below="@+id/call_noresponse_head"
+                            android:text="0"
+                            android:textSize="20dp"
+                            android:textColor="#565656"
+                            android:fontFamily="@font/inter_bold">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edittext_shape_new"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgLeadTypeIcon41"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lead_total_durr"
+                        android:layout_marginEnd="8dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/call_duration_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:singleLine="true"
+                            android:text="Total Duration"
+                            android:textColor="#4B4B4B"
+                            android:fontFamily="@font/inter_medium">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/call_total_duration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:layout_below="@+id/call_duration_head"
+                            android:text="00:00:00"
+                            android:textSize="20dp"
+                            android:textColor="#565656"
+                            android:fontFamily="@font/inter_bold">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_callhistroy"
+            android:layout_below="@+id/rel"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/lead_callhistroy_layout"/>
+
+
+        <!--<ImageView
+            android:id="@+id/img_create"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_blue2"
+            android:layout_below="@+id/rel"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="visible" />-->
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

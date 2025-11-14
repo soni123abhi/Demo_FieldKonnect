@@ -60,6 +60,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/rel_count"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="25dp"
@@ -85,6 +86,16 @@
                 </TextView>
 
             </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/ic_call_his"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toLeftOf="@+id/rel_count"
+                android:src="@drawable/ic_dial_call_icon"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="10dp" />
 
 
             <LinearLayout
@@ -195,7 +206,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/linearTop"
-        android:background="#e7e7e7"
+        android:background="#f2f2f4"
         android:layout_height="wrap_content">
 
         <RelativeLayout

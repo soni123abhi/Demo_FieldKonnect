@@ -366,11 +366,21 @@
                     android:textSize="14sp"
                     android:theme="@style/MyEditTextThemeColor" />
 
+                <CheckBox
+                    android:id="@+id/checkbox_location"
+                    android:layout_below="@+id/edtnote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:visibility="visible"
+                    android:text="are you at customer's place?" />
+
 
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardSubmit"
-                    android:layout_below="@+id/edtnote"
+                    android:layout_below="@+id/checkbox_location"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_horizontal"

@@ -21,6 +21,8 @@ import com.exp.clonefieldkonnect.model.ExpenseApprovalSubmitModel
 import com.exp.clonefieldkonnect.model.ExpenseTypeModel
 import com.exp.clonefieldkonnect.model.GetDiscountLimitModel
 import com.exp.clonefieldkonnect.model.InsertOrderRequestModel
+import com.exp.clonefieldkonnect.model.LastCallRemarkModel
+import com.exp.clonefieldkonnect.model.LeadCallLogDetailModel
 import com.exp.clonefieldkonnect.model.LeadContactModel
 import com.exp.clonefieldkonnect.model.LeadDetailModel
 import com.exp.clonefieldkonnect.model.LeadModel
@@ -476,6 +478,26 @@ class ApiClient {
                 }
 
                 override fun onFailure(call: Call<UserActiveModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
+        fun getLastcallremark(
+            token: String,
+            resultLitener: APIResultLitener<LastCallRemarkModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().getLastCallremark(token)
+
+            apiResponseCall.enqueue(object : Callback<LastCallRemarkModel> {
+                override fun onResponse(
+                    call: Call<LastCallRemarkModel>, response: retrofit2.Response<LastCallRemarkModel>
+                ) {
+
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<LastCallRemarkModel>, t: Throwable) {
                     resultLitener.onAPIResult(null, t.message)
                 }
             })
@@ -1043,6 +1065,28 @@ class ApiClient {
             })
         }
 
+
+        fun getleadlogdetail(
+            token: String,
+            queryParams: Map<String, String>,
+            resultLitener: APIResultLitener<LeadCallLogDetailModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().getleadlogdetaill(token, queryParams)
+
+            apiResponseCall.enqueue(object : Callback<LeadCallLogDetailModel> {
+                override fun onResponse(
+                    call: Call<LeadCallLogDetailModel>, response: retrofit2.Response<LeadCallLogDetailModel>
+                ) {
+
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<LeadCallLogDetailModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
         fun getleadtask(
             token: String,
             queryParams: Map<String, String>,
@@ -1451,7 +1495,6 @@ class ApiClient {
                 override fun onResponse(
                     call: Call<NewDealerViewDetailMOdel>, response: retrofit2.Response<NewDealerViewDetailMOdel>
                 ) {
-
                     resultLitener.onAPIResult(response, null)
                 }
 
@@ -1466,6 +1509,27 @@ class ApiClient {
             resultLitener: APIResultLitener<AttendanceSubmitModel>
         ) {
             val apiResponseCall = getBaseApiServiceInstance1().submitdraftreport(token, queryParams)
+
+            apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
+                override fun onResponse(
+                    call: Call<AttendanceSubmitModel>, response: retrofit2.Response<AttendanceSubmitModel>
+                ) {
+
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<AttendanceSubmitModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
+        fun submitcallremark(
+            token: String,
+            queryParams: Map<String, String>,
+            resultLitener: APIResultLitener<AttendanceSubmitModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().submitCallremarkk(token, queryParams)
 
             apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
                 override fun onResponse(
@@ -1897,6 +1961,27 @@ class ApiClient {
             resultLitener: APIResultLitener<AttendanceSubmitModel>
         ) {
             val apiResponseCall = getBaseApiServiceInstance1().submitcreatelead(token, queryParams)
+
+            apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
+                override fun onResponse(
+                    call: Call<AttendanceSubmitModel>, response: retrofit2.Response<AttendanceSubmitModel>
+                ) {
+
+                    resultLitener.onAPIResult(response, null)
+                }
+
+                override fun onFailure(call: Call<AttendanceSubmitModel>, t: Throwable) {
+                    resultLitener.onAPIResult(null, t.message)
+                }
+            })
+        }
+
+        fun submitleadcalllog(
+            token: String,
+            queryParams: Map<String, String>,
+            resultLitener: APIResultLitener<AttendanceSubmitModel>
+        ) {
+            val apiResponseCall = getBaseApiServiceInstance1().submitleadcalloggg(token, queryParams)
 
             apiResponseCall.enqueue(object : Callback<AttendanceSubmitModel> {
                 override fun onResponse(

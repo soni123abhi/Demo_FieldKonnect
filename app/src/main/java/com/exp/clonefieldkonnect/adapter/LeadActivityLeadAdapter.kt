@@ -84,6 +84,8 @@ class LeadActivityLeadAdapter(var activity: Activity, var useractivitylist: Arra
         if (item.type.equals("task")){
             holder.card_status.visibility = View.VISIBLE
             holder.tv_created_by.visibility = View.VISIBLE
+            holder.tv_estimate_close_date.visibility = View.GONE
+            holder.tv_confidence.visibility = View.GONE
 
             holder.tv_lead_status.text = item.priority
             holder.tv_msg.text = item.description +"("+item.date+","+item.time+")"
@@ -95,13 +97,9 @@ class LeadActivityLeadAdapter(var activity: Activity, var useractivitylist: Arra
         }else if (item.type.equals("note")){
             holder.card_status.visibility = View.GONE
             holder.tv_created_by.visibility = View.VISIBLE
+            holder.tv_estimate_close_date.visibility = View.GONE
+            holder.tv_confidence.visibility = View.GONE
 
-
-           /* val spanned: Spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(item.note ?: "", Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(item.note ?: "")
-            }*/
             holder.tv_msg.text = item.note.toString()
 
 
@@ -111,11 +109,41 @@ class LeadActivityLeadAdapter(var activity: Activity, var useractivitylist: Arra
         }else if (item.type.equals("log")){
             holder.tv_created_by.visibility = View.GONE
             holder.card_status.visibility = View.GONE
+            holder.tv_estimate_close_date.visibility = View.GONE
+            holder.tv_confidence.visibility = View.GONE
 
             holder.tv_msg.text = item.message.toString()
 
             ViewCompat.setBackgroundTintList(holder.rel_image, ColorStateList.valueOf(Color.parseColor("#E4DDFE")))
             holder.img_taskk.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_lead_log))
+
+        }else if (item.type.equals("call_log")){
+            holder.card_status.visibility = View.GONE
+            holder.tv_created_by.visibility = View.VISIBLE
+            holder.tv_estimate_close_date.visibility = View.GONE
+            holder.tv_confidence.visibility = View.GONE
+
+            statementHandler.tv_headd.text = "Call Log"
+
+            holder.tv_msg.text = item.remark.toString()
+
+            ViewCompat.setBackgroundTintList(holder.rel_image, ColorStateList.valueOf(Color.parseColor("#344D89")))
+            holder.img_taskk.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_lead_call))
+
+        }else if (item.type.equals("opportunity")){
+            holder.card_status.visibility = View.VISIBLE
+            holder.tv_created_by.visibility = View.VISIBLE
+            holder.tv_estimate_close_date.visibility = View.VISIBLE
+            holder.tv_confidence.visibility = View.VISIBLE
+
+            holder.tv_lead_status.text = item.status.toString()
+            holder.tv_estimate_close_date.text = "Estimated close date: "+item.createdAtFormatted.toString()
+            holder.tv_confidence.text = "Confidence: "+item.confidence.toString()+"%"
+
+            holder.tv_msg.text = item.note.toString()
+
+            ViewCompat.setBackgroundTintList(holder.rel_image, ColorStateList.valueOf(Color.parseColor("#CAF4C6")))
+            holder.img_taskk.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_activity_show_opportunity))
 
         }
 
@@ -146,6 +174,8 @@ class LeadActivityLeadAdapter(var activity: Activity, var useractivitylist: Arra
         var tv_created_by: TextView = itemView.findViewById(R.id.tv_created_by)
         var tv_msg: TextView = itemView.findViewById(R.id.tv_msg)
         var tv_time: TextView = itemView.findViewById(R.id.tv_time)
+        var tv_estimate_close_date: TextView = itemView.findViewById(R.id.tv_estimate_close_date)
+        var tv_confidence: TextView = itemView.findViewById(R.id.tv_confidence)
         var rel_image: CardView = itemView.findViewById(R.id.rel_image)
         var card_status: CardView = itemView.findViewById(R.id.card_status)
         var img_taskk: ImageView = itemView.findViewById(R.id.img_taskk)
